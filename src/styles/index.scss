@@ -1,3 +1,6 @@
+/* Put aqueduct-components styles first to be able to overwrite them. */
+@import '../../node_modules/aqueduct-components/dist/main.css';
+
 /* Settings */
 @import "settings";
 @import "functions";
@@ -10,5 +13,7 @@
 @import "lib/foundation";
 
 // /* components */
-@import "components/main";
 @import "components/dashboard";
+@import "components/header";
+@import "components/main";
+@import "components/map";
