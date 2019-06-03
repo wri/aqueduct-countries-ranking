@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { Icons } from 'aqueduct-components';
 
 import * as serviceWorker from 'config/serviceWorker';
 import store from 'config/store';
@@ -8,8 +9,11 @@ import Pages from 'components/layout';
 
 import 'styles/index.scss';
 
+import 'aqueduct-components/dist/bundle';
+
 const App = () => (
   <Provider store={store}>
+    <Icons />
     <Pages />
   </Provider>
 );
