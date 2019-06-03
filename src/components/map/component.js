@@ -1,7 +1,17 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import { Map as LeMap } from 'vizzuality-components';
+import {
+  Map as LeMap,
+  MapControls,
+  ZoomControl,
+  Icon,
+  Legend,
+  LegendListItem
+} from 'vizzuality-components';
+
+// We need to prefix icon name with 'icon-' because Icon from vizzuality
+// does not do that automatically but Icon from aqueduct does.
 
 import isEqual from 'lodash/isEqual';
 import isEmpty from 'lodash/isEmpty';
@@ -63,16 +73,28 @@ class Map extends Component {
         }
       },
       events: {
-        zoomend: (e, map) => { console.info(e, map); },
-        dragend: (e, map) => { console.info(e, map); }
+        zoomend: (e, map) => { /*console.info(e, map);*/ },
+        dragend: (e, map) => { /*console.info(e, map);*/ }
       }
     };
 
+    const zoom = 10;
+    const minZoom = 2;
+    const maxZoom =  2;
+
     return (
       <LeMap {...mapProps}>
-        {map => {
-          console.log(map);
-        }}
+        {_map => (
+          <Fragment>
+            <MapControls>
+              <ZoomControl map={_map} />
+              <Icon className="-medium" name="icon-share" />
+              <Icon className="-medium" name="icon-download" />
+            </MapControls>
+            <Legend>
+            </Legend>
+          </Fragment>
+        )}
       </LeMap>
     );
   }

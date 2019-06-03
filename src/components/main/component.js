@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Sidebar, SegmentedUi, Spinner } from 'aqueduct-components';
+import { Sidebar } from 'aqueduct-components';
 
 import Dashboard from 'components/dashboard';
 import Map from 'components/map';
