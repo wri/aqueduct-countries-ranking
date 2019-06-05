@@ -7,11 +7,11 @@ import {
   ZoomControl,
   Icon,
   Legend,
-  LegendListItem
+  // LegendListItem
 } from 'vizzuality-components';
 
-// We need to prefix icon name with 'icon-' because Icon from vizzuality
-// does not do that automatically but Icon from aqueduct does.
+import { PluginLeaflet } from 'layer-manager';
+import { LayerManager /*, Layer*/} from 'layer-manager/dist/components';
 
 import isEqual from 'lodash/isEqual';
 import isEmpty from 'lodash/isEmpty';
@@ -29,7 +29,8 @@ class Map extends Component {
     setMapViewport: PropTypes.func,
     onViewportChange: PropTypes.func,
     onLoad: PropTypes.func,
-    onStyleLoad: PropTypes.func
+    onStyleLoad: PropTypes.func,
+    layers: PropTypes.array,
   }
 
   static defaultProps = {
@@ -41,7 +42,8 @@ class Map extends Component {
     onViewportChange: () => {},
     onLoad: () => {},
     onStyleLoad: () => {},
-    setMapViewport: () => {}
+    setMapViewport: () => {},
+    layers: []
   }
 
   componentDidMount() {
@@ -78,14 +80,19 @@ class Map extends Component {
       }
     };
 
-    const zoom = 10;
-    const minZoom = 2;
-    const maxZoom =  2;
-
+    // NOTE: We need to prefix icon name with 'icon-' because Icon from vizzuality
+    // does not do that automatically but Icon from aqueduct does.
     return (
       <LeMap {...mapProps}>
         {_map => (
           <Fragment>
+            <LayerManager
+                map={_map}
+                plugin={PluginLeaflet}
+                onReady={() => { /*if (loading) setLoading(false);*/ }}
+            >
+              {/* <Layer /> */}
+            </LayerManager>
             <MapControls>
               <ZoomControl map={_map} />
               <Icon className="-medium" name="icon-share" />

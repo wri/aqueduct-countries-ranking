@@ -12,6 +12,7 @@ const Header = ({setCountry}) => (
     <Field
       name="location-filter"
       className="-bigger"
+      label="Select country"
     >
       <CustomSelect
         theme="dark"
