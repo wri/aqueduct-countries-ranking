@@ -9,16 +9,8 @@ export const getLayers = createThunkAction('LAYERS/getLayers', () => dispatch =>
   dispatch(setError(null));
 
   const datasets = {
-    // baseline datasets
-    annual: '529e614f-9192-43a5-a890-ce1dc3630aa6',
-    monthly: 'bd965bd5-9568-4637-a873-2872f39c4803',
-    // non-baseline datasets
-    projected: '17f3b259-b3b9-4bd6-910d-852fb3c1c510',
-    // presets
-    // weights: 'dee362f5-6631-46b2-a8e3-bdd05d5605ce',
-    custom: 'cbe7cee3-b44b-4e56-8233-9111b4076fe0',
-    hydrobasins: '57de0a79-caaa-4caa-bcfd-a1faff7103b8',
-    aquifers: 'f239298f-25a1-430d-9723-f0a853b81184'
+    country_rankings: 'fd4b4ba5-a16a-45a4-bc6b-954397e37bda',
+    province_rankings: 'e0adfbfb-441d-4ec5-9e4c-7d051d0f7b22'
   };
 
   return WRIService.fetchDatasetsLayers(datasets)

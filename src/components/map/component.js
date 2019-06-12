@@ -11,7 +11,7 @@ import {
 } from 'vizzuality-components';
 
 import { PluginLeaflet } from 'layer-manager';
-import { LayerManager /*, Layer*/} from 'layer-manager/dist/components';
+import { LayerManager, Layer } from 'layer-manager/dist/components';
 
 import isEqual from 'lodash/isEqual';
 import isEmpty from 'lodash/isEmpty';
@@ -64,7 +64,7 @@ class Map extends Component {
   }
 
   render() {
-    const { className = '' } = this.props;
+    const { className = '', layers } = this.props;
     const mapProps = {
       customClass: className,
       mapOptions: {
@@ -91,7 +91,9 @@ class Map extends Component {
                 plugin={PluginLeaflet}
                 onReady={() => { /*if (loading) setLoading(false);*/ }}
             >
-              {/* <Layer /> */}
+              {layers.map(layer => (
+                <Layer key={layer.id} {...layer} />
+              ))}
             </LayerManager>
             <MapControls>
               <ZoomControl map={_map} />
