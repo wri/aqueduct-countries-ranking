@@ -4,7 +4,8 @@ import { setCountry } from 'modules/app/actions';
 import Header from './component';
 
 const mapStateToProps = state => ({
-  ...state.app
+  ...state.app,
+  isCountrySelected: false
 });
 
 const mapDispatchToProps = {
