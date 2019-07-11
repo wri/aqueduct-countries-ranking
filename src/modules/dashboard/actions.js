@@ -12,13 +12,13 @@ export const setIndicatorValue = createAction('DASHBOARD/setIndicatorValue');
 export const getCountries = createThunkAction('DASHBOARD/getCountries', () => dispatch => {
   // JSON should not be imported here!
   // todo: use a service
-  dispatch(setCountries({countries: countries.map(item => ({label: item.name, value: item.iso}))}));
+  dispatch(setCountries({data: countries.map(item => ({label: item.name, value: item.iso}))}));
 });
 
 export const getIndicators = createThunkAction('DASHBOARD/getIndicators', () => dispatch => {
   // todo: use a service
-  dispatch(setIndicators({indicators: INDICATORS}));
-  dispatch(setIndicatorValue({indicatorValue: INDICATORS[0].value}));
+  dispatch(setIndicators({data: INDICATORS}));
+  dispatch(setIndicatorValue({data: INDICATORS[0].value}));
 });
 
 export default {

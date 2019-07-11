@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Field, CustomSelect } from 'aqueduct-components';
 
@@ -23,52 +23,37 @@ const IndicatorsContainer = () => (
 );
 
 const Header = ({
-  getCountries,
-  getIndicators,
   countries,
-  countryValue,
   setCountryValue,
   indicators,
-  indicatorValue,
   setIndicatorValue
-}) => {
-  useEffect(() => {
-    if (countries.length === 0) {
-      getCountries();
-    }
-    if (indicators.length === 0) {
-      getIndicators();
-    }
-  });
-
-  return (
-    <header className="c-header">
+}) => console.log(countries) || (
+  <header className="c-header">
+    <CustomSelect
+      theme="light"
+      placeholder="Search a country"
+      options={countries.list}
+      onChange={option => setCountryValue({data: option.value})}
+      customClass="header--country-selector"
+      styles={countrySelectStyles}
+      components={{ IndicatorsContainer }}
+      value={countries.value}
+    />
+    <Field
+      name="indication-filter"
+      label="Water Risk Indicator"
+      className="-bigger"
+    >
       <CustomSelect
         theme="light"
-        placeholder="Search a country"
-        options={countries}
-        onChange={option => setCountryValue({countryValue: option.value})}
-        customClass="header--country-selector"
-        styles={countrySelectStyles}
-        components={{ IndicatorsContainer }}
-        value={countryValue}
+        options={indicators.list}
+        onChange={setIndicatorValue}
+        customClass="header--indicator-selector"
+        value={indicators.value}
       />
-      <Field
-        name="indication-filter"
-        label="Water Risk Indicator"
-        className="-bigger"
-      >
-        <CustomSelect
-          theme="light"
-          options={indicators}
-          onChange={setIndicatorValue}
-          customClass="header--indicator-selector"
-          value={indicatorValue}
-        />
-      </Field>
-    </header>
-  ); 
-}
+    </Field>
+  </header>
+);
 
 Header.propTypes = {
   getCountries: PropTypes.func,

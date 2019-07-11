@@ -5,8 +5,18 @@ export default {
   scope: SCOPE.GENERAL,
   isCollapsed: false,
   locationId: null,
-  countries: [],
-  countryValue: null,
-  indicators: [],
-  indicatorValue: null
+  countries: {
+    list: [],
+    value: null,
+    isLoading: false,
+    isLoaded: false,
+    error: null
+  },
+  indicators: {
+    list: [],
+    value: null,
+    isLoading: false,
+    isLoaded: false,
+    error: null
+  }
 };

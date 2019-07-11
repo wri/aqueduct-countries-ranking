@@ -1,9 +1,9 @@
 import * as actions from './actions';
 
 export default {
-  [actions.setCountries]: (state, { payload: { countries }}) => ({ ...state, countries }),
-  [actions.setIndicators]: (state, { payload: { indicators } }) => ({ ...state, indicators }),
-  [actions.setLocation]: (state, { payload: { locationId } }) => ({ ...state, locationId }),
-  [actions.setCountryValue]: (state, { payload: { countryValue } }) => ({ ...state, countryValue }),
-  [actions.setIndicatorValue]: (state, { payload: { indicatorValue } }) => ({ ...state, indicatorValue })
+  [actions.setCountries]: (state, { payload: { data }}) => ({ ...state, countries: {...state.countries, list: data} }),
+  [actions.setIndicators]: (state, { payload: { data } }) => ({ ...state, indicators: {...state.indicators, list: data} }),
+  [actions.setLocation]: (state, { payload: { data } }) => ({ ...state, data }),
+  [actions.setCountryValue]: (state, { payload: { data } }) => ({ ...state, countries: {...state.countries, value: data} }),
+  [actions.setIndicatorValue]: (state, { payload: { data } }) => ({ ...state, indicators: {...state.indicators, value: data} })
 };

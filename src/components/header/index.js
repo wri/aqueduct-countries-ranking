@@ -1,19 +1,18 @@
 import { connect } from 'react-redux';
 
 import {
-  getCountries,
-  getIndicators,
   setCountryValue
 } from 'modules/dashboard/actions';
+import {
+  getHeaderProps
+} from 'modules/dashboard/selectors';
 import Header from './component';
 
 const mapStateToProps = state => ({
-  ...state.dashboard,
+  ...getHeaderProps(state)
 });
 
 const mapDispatchToProps = {
-  getCountries,
-  getIndicators,
   setCountryValue
 };
 
