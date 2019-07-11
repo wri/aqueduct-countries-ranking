@@ -1,15 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Field, CustomSelect } from 'aqueduct-components';
 
 import { Icon } from 'vizzuality-components';
-
-
-const options = [
-  { label: 'Uno', value: 'uno' },
-  { label: 'Dos', value: 'dos' },
-  { label: 'Tres', value: 'tres' }
-];
 
 const countrySelectStyles = {
   container: styles => ({
@@ -20,10 +13,6 @@ const countrySelectStyles = {
     ...styles,
     height: '40px',
     marginLeft: '16px'
-  }),
-  option: styles => ({
-    ...styles,
-    backgroundColor: '#f00'
   })
 };
 
@@ -33,40 +22,72 @@ const IndicatorsContainer = () => (
   </div>
 );
 
-const Header = ({ setCountry, isCountrySelected }) => (
-  <header className="c-header">
-    <CustomSelect
-      theme="light"
-      placeholder="Search a country"
-      options={options}
-      onChange={setCountry}
-      customClass="header--country-selector"
-      styles={countrySelectStyles}
-      components={{ IndicatorsContainer }}
-    />
-    <Field
-      name="indication-filter"
-      label="Water Risk Indicator"
-      className="-bigger"
-    >
+const Header = ({
+  getCountries,
+  getIndicators,
+  countries,
+  countryValue,
+  setCountryValue,
+  indicators,
+  indicatorValue,
+  setIndicatorValue
+}) => {
+  useEffect(() => {
+    if (countries.length === 0) {
+      getCountries();
+    }
+    if (indicators.length === 0) {
+      getIndicators();
+    }
+  });
+
+  return (
+    <header className="c-header">
       <CustomSelect
         theme="light"
-        options={options}
-        onChange={setCountry}
-        customClass="header--indicator-selector"
+        placeholder="Search a country"
+        options={countries}
+        onChange={option => setCountryValue({countryValue: option.value})}
+        customClass="header--country-selector"
+        styles={countrySelectStyles}
+        components={{ IndicatorsContainer }}
+        value={countryValue}
       />
-    </Field>
-  </header>
-);
+      <Field
+        name="indication-filter"
+        label="Water Risk Indicator"
+        className="-bigger"
+      >
+        <CustomSelect
+          theme="light"
+          options={indicators}
+          onChange={setIndicatorValue}
+          customClass="header--indicator-selector"
+          value={indicatorValue}
+        />
+      </Field>
+    </header>
+  ); 
+}
 
 Header.propTypes = {
+  getCountries: PropTypes.func,
+  getIndicators: PropTypes.func,
   setCountry: PropTypes.func,
-  isCountrySelected: PropTypes.bool
+  setIndicator: PropTypes.func,
+  countryValue: PropTypes.string,
+  indicatorValue: PropTypes.string
 };
 
 Header.defaultProps = {
-  setCountry: () => {},
-  isCountrySelected: false
+  getCountries: () => {},
+  getIndicators: () => {},
+  setCountry: () => {
+    console.log('Country value was changed.');
+  },
+  setIndicator: () => {
+    console.log('Indicator value was changed.');
+  }
 };
 
 export default Header;

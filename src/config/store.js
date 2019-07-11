@@ -7,13 +7,15 @@ import * as app from 'modules/app';
 import * as pages from 'modules/pages';
 import * as map from 'modules/map';
 import * as layers from 'modules/layers';
+import * as dashboard from 'modules/dashboard';
 import router from './router';
 
 const modules = [
   { namespace: 'app', components: app },
   { namespace: 'page', components: pages },
   { namespace: 'map', components: map },
-  { namespace: 'layers', components: layers }
+  { namespace: 'layers', components: layers },
+  { namespace: 'dashboard', components: dashboard }
 ];
 
 const {
