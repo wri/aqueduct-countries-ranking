@@ -18,5 +18,10 @@ export default {
     isLoading: false,
     isLoaded: false,
     error: null
+  },
+  widget: {
+    isLoading: false,
+    isLoaded: false,
+    data: []
   }
 };

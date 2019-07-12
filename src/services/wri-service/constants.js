@@ -13,33 +13,22 @@ export const INDICATORS = [
   }
 ];
 
-export const INDICATORS_CATEGORIES = [
-  {
-    name: 'Total gross withdrawal',
-    code: 'Tot'
-  },
-  {
-    name: 'Domestic gross withdrawal',
-    code: 'Dom'
-  },
-  {
-    name: 'Industrial gross withdrawal',
-    code: 'Ind'
-  },
-  {
-    name: 'Irrigation gross withdrawal',
-    code: 'Irr'
-  },
-  {
-    name: 'Livestock gross withdrawal',
-    code: 'Liv'
-  },
-  {
-    name: 'Population',
-    code: 'Pop'
-  }
-];
+export const INDICATOR_CATEGORIES = {
+  'Tot': 'Total gross withdrawal',
+  'Dom': 'Domestic gross withdrawal',
+  'Ind': 'Industrial gross withdrawal',
+  'Irr': 'Irrigation gross withdrawal',
+  'Liv': 'Livestock gross withdrawal',
+  'Pop': 'Population',
+};
+
+export const ERRORS = {
+  MISSING_REQUIRED_PARAMETER: 'Required parameter is not present.',
+  MISSING_WIDGET_REQUEST_PARAMETERS: 'Cannot make widget data request. Missing parameters.'
+};
 
 export default {
-  INDICATORS
+  INDICATORS,
+  INDICATOR_CATEGORIES,
+  ERRORS
 };

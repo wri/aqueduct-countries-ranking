@@ -1,5 +1,7 @@
 import { createAction, createThunkAction } from 'vizzuality-redux-tools';
 
+import WRIService from 'services/wri-service';
+
 import { default as countries } from 'services/data/countries.json';
 import { INDICATORS } from 'services/wri-service/constants';
 
@@ -8,6 +10,7 @@ export const setIndicators = createAction('DASHBOARD/setIndicators');
 export const setLocation = createAction('DASHBOARD/setLocation');
 export const setCountryValue = createAction('DASHBOARD/setCountryValue');
 export const setIndicatorValue = createAction('DASHBOARD/setIndicatorValue');
+export const setWidgetData = createAction('DASHBOARD/setWidgetData');
 
 export const getCountries = createThunkAction('DASHBOARD/getCountries', () => dispatch => {
   // JSON should not be imported here!
@@ -21,8 +24,32 @@ export const getIndicators = createThunkAction('DASHBOARD/getIndicators', () => 
   dispatch(setIndicatorValue({data: INDICATORS[0].value}));
 });
 
+export const getWidgetData = createThunkAction('DASHBOARD/getWidgetData', () => (dispatch, state) => {
+  const indicator = state().dashboard.indicators.value;
+  
+  if (!indicator) return;
+
+  const options = {
+    widget: {
+      id: 'e6e5d286-212b-48d8-b5f4-1678cded82bc',
+      params: { indicator }
+    }
+  };
+  return WRIService.fetchDatasetWidgets(options)
+  .then(res => {
+    dispatch(setWidgetData({data: res}));
+  })
+  .catch((err) => {
+    // dispatch(setError(err));
+    // dispatch(setLoading(false));
+  });
+});
+
 export default {
   setLocation,
   setCountryValue,
-  setIndicatorValue
+  setIndicatorValue,
+  getCountries,
+  getIndicators,
+  getWidgetData
 };

@@ -27,7 +27,7 @@ const Header = ({
   setCountryValue,
   indicators,
   setIndicatorValue
-}) => console.log(countries) || (
+}) => (
   <header className="c-header">
     <CustomSelect
       theme="light"
