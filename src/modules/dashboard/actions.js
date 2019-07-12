@@ -11,6 +11,7 @@ export const setLocation = createAction('DASHBOARD/setLocation');
 export const setCountryValue = createAction('DASHBOARD/setCountryValue');
 export const setIndicatorValue = createAction('DASHBOARD/setIndicatorValue');
 export const setWidgetData = createAction('DASHBOARD/setWidgetData');
+export const markForUpdate = createAction('DASHBOARD/markForUpdate');
 
 export const getCountries = createThunkAction('DASHBOARD/getCountries', () => dispatch => {
   // JSON should not be imported here!
@@ -45,11 +46,15 @@ export const getWidgetData = createThunkAction('DASHBOARD/getWidgetData', () => 
   });
 });
 
+export const updateDashboard = createThunkAction('DASHBOARD/updateDashboard', () => dispatch => {
+});
+
 export default {
   setLocation,
   setCountryValue,
   setIndicatorValue,
   getCountries,
   getIndicators,
-  getWidgetData
+  getWidgetData,
+  updateDashboard
 };

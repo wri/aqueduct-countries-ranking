@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Sidebar } from 'aqueduct-components';
 
 import Dashboard from 'components/dashboard';
@@ -11,7 +10,7 @@ class Main extends Component {
   }
   
   render() {
-    const { type, id, isDashboardCollapsed, setDashboardCollapsed } = this.props;
+    const { isDashboardCollapsed, setDashboardCollapsed } = this.props;
 
     return (
       <main className="c-main">
@@ -22,7 +21,7 @@ class Main extends Component {
           }}
           visible={!isDashboardCollapsed}
         >
-          <Dashboard type={type} id={id} />
+          <Dashboard />
         </Sidebar>
         <div className="map-wrapper">
           <Map className="c-aqueduct-map" />
@@ -31,15 +30,5 @@ class Main extends Component {
     );
   }
 }
-
-Main.propTypes = {
-  type: PropTypes.string,
-  id: PropTypes.string
-};
-
-Main.defaultProps = {
-  type: 'global',
-  id: null
-};
 
 export default Main;

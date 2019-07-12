@@ -2,6 +2,6 @@ import React from 'react';
 
 import Main from 'components/main';
 
-const HomePage = props => <Main {...props} />;
+const HomePage = () => <Main />;
 
 export default HomePage;

@@ -1,0 +1,26 @@
+.c-footer {
+  background-color: palette(blue, primary);
+  padding: 32px 52px;
+
+  .footer--country-selector {
+    margin-bottom: 30px;
+    border: 1px solid #B9D1FF;
+    border-radius: 3px;
+
+    .aq__react-select__control {
+      border-bottom-width: 0;
+    }
+  }
+
+  .footer--indicator-selector {
+    width: 292px;
+  }
+
+  .footer--country-select-icon {
+    margin-right: 24px;
+  }
+
+  svg {
+    fill: #B9D1FF;
+  }
+}

@@ -24,36 +24,41 @@ const IndicatorsContainer = () => (
 
 const Header = ({
   countries,
-  setCountryValue,
+  setCountry,
   indicators,
-  setIndicatorValue
-}) => (
-  <header className="c-header">
-    <CustomSelect
-      theme="light"
-      placeholder="Search a country"
-      options={countries.list}
-      onChange={option => setCountryValue({data: option.value})}
-      customClass="header--country-selector"
-      styles={countrySelectStyles}
-      components={{ IndicatorsContainer }}
-      value={countries.value}
-    />
-    <Field
-      name="indication-filter"
-      label="Water Risk Indicator"
-      className="-bigger"
-    >
+  setIndicator
+}) => {
+  const countryChangeHandler = option => setCountry({data: option.value});
+  const indicatorChangeHandler = option => setIndicator({data: option.value});
+
+  return (
+    <header className="c-header">
       <CustomSelect
         theme="light"
-        options={indicators.list}
-        onChange={setIndicatorValue}
-        customClass="header--indicator-selector"
-        value={indicators.value}
+        placeholder="Search a country"
+        options={countries.list}
+        onChange={countryChangeHandler}
+        customClass="header--country-selector"
+        styles={countrySelectStyles}
+        components={{ IndicatorsContainer }}
+        value={countries.value}
       />
-    </Field>
-  </header>
-);
+      <Field
+        name="indication-filter"
+        label="Water Risk Indicator"
+        className="-bigger"
+      >
+        <CustomSelect
+          theme="light"
+          options={indicators.list}
+          onChange={indicatorChangeHandler}
+          customClass="header--indicator-selector"
+          value={indicators.value}
+        />
+      </Field>
+    </header>
+  );
+};
 
 Header.propTypes = {
   getCountries: PropTypes.func,

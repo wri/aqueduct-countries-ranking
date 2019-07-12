@@ -1,32 +1,31 @@
 import { connect } from 'react-redux';
 
 import {
-  setSearchActive,
-  setDashboardCollapsed
-} from 'modules/app/actions';
-import {
   getCountries,
   getIndicators,
   getWidgetData
 } from 'modules/dashboard/actions';
+import {
+  areCountriesReady,
+  areIndicatorsReady,
+  isWidgetNew
+} from 'modules/dashboard/selectors';
 
 import Dashboard from './component';
 
 const mapStateToProps = state => ({
   ...state.app,
-  areCountriesReady: state.dashboard.countries.isLoaded && !state.dashboard.countries.isLoading,
-  areIndicatorsReady: state.dashboard.indicators.isLoaded && !state.dashboard.indicators.isLoading,
+  areCountriesReady: areCountriesReady(state),
+  areIndicatorsReady: areIndicatorsReady(state),
   widget: {
     ...state.dashboard.widget,
-    isNew: !state.dashboard.widget.isLoaded && !state.dashboard.widget.isLoading
+    isNew: isWidgetNew(state)
   }
 });
 
 const mapDispatchToProps = {
   getCountries,
   getIndicators,
-  setSearchActive,
-  setDashboardCollapsed,
   getWidgetData
 };
 

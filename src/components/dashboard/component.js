@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 
 import { INDICATOR_CATEGORIES }  from 'services/wri-service/constants';
 import Header from 'components/header';
+import Footer from 'components/footer';
 
 // todo: This is a widget, but not for this task, just a demo for now.
 function renderWidget(widgetState) {
@@ -14,7 +15,10 @@ function renderWidget(widgetState) {
       );
     } else {
       return (
-        <div>
+        <div style={{
+          maxHeight: '150px',
+          overflowY: 'scroll'
+        }}>
           <h2>Here will be the widget. But for now...</h2>
           {Object.entries(data).map((country, index) => {
             const countryWidget = country[1].reduce((acc, entry) => ({
@@ -74,6 +78,7 @@ const Dashboard = ({
     <div className="dashboard">
       <Header />
       {renderWidget(widget)}
+      <Footer />
     </div>
   );
 };

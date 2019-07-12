@@ -1,8 +1,9 @@
 import { connect } from 'react-redux';
 
 import {
-  setCountryValue
-} from 'modules/dashboard/actions';
+  setCountry,
+  setIndicator
+} from 'modules/app/actions';
 import {
   getHeaderProps
 } from 'modules/dashboard/selectors';
@@ -13,7 +14,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  setCountryValue
+  setCountry,
+  setIndicator
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
