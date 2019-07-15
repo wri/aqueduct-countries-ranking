@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 
+import { setCountry } from 'modules/app/actions';
 import {
   getCountries,
   getIndicators,
@@ -8,25 +9,28 @@ import {
 import {
   areCountriesReady,
   areIndicatorsReady,
-  isWidgetNew
+  isWidgetNew,
+  getCountryData
 } from 'modules/dashboard/selectors';
 
 import Dashboard from './component';
 
 const mapStateToProps = state => ({
-  ...state.app,
+  scope: state.dashboard.scope,
   areCountriesReady: areCountriesReady(state),
   areIndicatorsReady: areIndicatorsReady(state),
   widget: {
     ...state.dashboard.widget,
     isNew: isWidgetNew(state)
-  }
+  },
+  countryData: getCountryData(state)
 });
 
 const mapDispatchToProps = {
   getCountries,
   getIndicators,
-  getWidgetData
+  getWidgetData,
+  setCountry
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

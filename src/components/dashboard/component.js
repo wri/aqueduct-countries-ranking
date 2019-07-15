@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react';
 
 import { INDICATOR_CATEGORIES }  from 'services/wri-service/constants';
-import Header from 'components/header';
+import HeaderGeneral from 'components/header-general';
+import HeaderCountry from 'components/header-country';
 import Footer from 'components/footer';
+
+import { SCOPE } from 'modules/dashboard/constants';
 
 // todo: This is a widget, but not for this task, just a demo for now.
 function renderWidget(widgetState) {
@@ -15,10 +18,7 @@ function renderWidget(widgetState) {
       );
     } else {
       return (
-        <div style={{
-          maxHeight: '150px',
-          overflowY: 'scroll'
-        }}>
+        <div style={{ overflowY: 'scroll' }}>
           <h2>Here will be the widget. But for now...</h2>
           {Object.entries(data).map((country, index) => {
             const countryWidget = country[1].reduce((acc, entry) => ({
@@ -54,12 +54,15 @@ function renderWidget(widgetState) {
 }
 
 const Dashboard = ({
+  scope,
   areCountriesReady,
-  getCountries,
   areIndicatorsReady,
+  widget,
+  countryData,
+  getCountries,
   getIndicators,
   getWidgetData,
-  widget
+  setCountry
 }) => {
   useEffect(() => {
     if (!areCountriesReady) {
@@ -74,11 +77,16 @@ const Dashboard = ({
     }
   });
 
+  const backClickHandler = () => setCountry({data: null});
+
   return (
     <div className="dashboard">
-      <Header />
+      { scope === SCOPE.GENERAL ?
+        <HeaderGeneral /> :
+        <HeaderCountry onBackClick={backClickHandler} country={countryData}/>
+      }
       {renderWidget(widget)}
-      <Footer />
+      <Footer scope={scope} />
     </div>
   );
 };

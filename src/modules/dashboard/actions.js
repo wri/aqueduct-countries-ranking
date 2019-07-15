@@ -46,15 +46,11 @@ export const getWidgetData = createThunkAction('DASHBOARD/getWidgetData', () => 
   });
 });
 
-export const updateDashboard = createThunkAction('DASHBOARD/updateDashboard', () => dispatch => {
-});
-
 export default {
   setLocation,
   setCountryValue,
   setIndicatorValue,
   getCountries,
   getIndicators,
-  getWidgetData,
-  updateDashboard
+  getWidgetData
 };

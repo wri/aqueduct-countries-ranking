@@ -1,26 +1,31 @@
+$text-color: #AFC7FF;
+
 .c-header {
   background-color: palette(blue, primary);
-  padding: 32px 52px;
 
-  .header--country-selector {
-    margin-bottom: 30px;
-    border: 1px solid #B9D1FF;
-    border-radius: 3px;
+  .header--back-button {
+    padding: 0 52px;
+    color: $text-color;
+    background-color: palette(blue, dark);
+    cursor: pointer;
+    height: 53px;
+    line-height: 50px;
+    font-size: $font-size-default;
 
-    .aq__react-select__control {
-      border-bottom-width: 0;
+    span {
+      margin-left: 14px;
+    }
+
+    svg {
+      fill: $text-color;
     }
   }
 
-  .header--indicator-selector {
-    width: 292px;
+  .header--content {
+    padding: 32px 52px;
   }
 
-  .header--country-select-icon {
-    margin-right: 24px;
-  }
-
-  svg {
-    fill: #B9D1FF;
+  .-uppercase {
+    text-transform: uppercase;
   }
 }

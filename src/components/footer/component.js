@@ -1,40 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Field, CustomSelect } from 'aqueduct-components';
-
-import { Icon } from 'vizzuality-components';
+import { Field } from 'aqueduct-components';
 
 import { SCOPE } from 'modules/dashboard/constants';
-
-const countrySelectStyles = {
-  container: styles => ({
-    ...styles,
-    height: '40px'
-  }),
-  valueContainer: styles => ({
-    ...styles,
-    height: '40px',
-    marginLeft: '16px'
-  })
-};
-
-const IndicatorsContainer = () => (
-  <div className="footer--country-select-icon">
-    <Icon className="-small" name="icon-search" />
-  </div>
-);
+import CountrySelector from 'components/country-selector';
 
 const Footer = ({
-  scope,
-  locationId,
-  countries,
-  setCountry
+  scope
 }) => {
   if (scope === SCOPE.GENERAL) {
     return null;
   }
-
-  const countryChangeHandler = option => setCountry({data: option.value});
 
   return (
     <footer className="c-footer">
@@ -43,32 +19,14 @@ const Footer = ({
         label="Explore more"
         className="-bigger"
       >
-        <CustomSelect
-          theme="light"
-          placeholder="Search a country"
-          options={countries.list}
-          onChange={countryChangeHandler}
-          customClass="footer--country-selector"
-          styles={countrySelectStyles}
-          components={{ IndicatorsContainer }}
-          value={countries.value}
-        />
+        <CountrySelector />
       </Field>
     </footer>
   );
 };
 
 Footer.propTypes = {
-  scope: PropTypes.string.isRequired,
-  locationId: PropTypes.string.isRequired,
-  countries: PropTypes.shape({}),
-  setCountry: PropTypes.func,
-};
-
-Footer.defaultProps = {
-  setCountry: () => {
-    console.log('Country value was changed.');
-  }
+  scope: PropTypes.string.isRequired
 };
 
 export default Footer;

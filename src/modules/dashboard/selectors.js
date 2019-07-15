@@ -1,30 +1,25 @@
 import { createSelector } from 'reselect';
 
 const dashboard = state => state.dashboard;
+const countries = createSelector([dashboard], _dashboard => _dashboard.countries);
+const indicators = createSelector([dashboard], _dashboard => _dashboard.indicators);
+const widget = createSelector([dashboard], _dashboard => _dashboard.widget);
 
-export const getCountries = createSelector([dashboard], _dashboard => _dashboard.countries);
-export const getIndicators = createSelector([dashboard], _dashboard => _dashboard.indicators);
-export const getWidget = createSelector([dashboard], _dashboard => _dashboard.widget);
+export const currentLocation = createSelector([dashboard], _dashboard => _dashboard.locationId);
 
-export const getHeaderProps = createSelector([
-  dashboard,
-  getCountries,
-  getIndicators
-], (dashboard, countries, indicators) => ({
-  scope: dashboard.scope,
-  locationId: dashboard.locationId,
-  countries,
-  indicators
-}));
-
-export const areCountriesReady = createSelector([getCountries], _countries => (
+export const areCountriesReady = createSelector([countries], _countries => (
   _countries.isLoaded && !_countries.isLoading
 ));
 
-export const areIndicatorsReady = createSelector([getIndicators], _indicators => (
+export const areIndicatorsReady = createSelector([indicators], _indicators => (
   _indicators.isLoaded && !_indicators.isLoading
 ));
 
-export const isWidgetNew = createSelector([getWidget], _widget => (
+export const isWidgetNew = createSelector([widget], _widget => (
   !_widget.isLoaded && !_widget.isLoading
 ));
+
+export const getCountryData = createSelector(
+  [currentLocation, widget],
+  (_currentLocation, _widget) => _currentLocation ? _widget.data[_currentLocation] : null
+);
