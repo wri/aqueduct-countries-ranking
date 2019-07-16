@@ -64,14 +64,14 @@ class Map extends Component {
   }
 
   render() {
-    const { className = '', layers } = this.props;
+    const { className = '', viewport, layers } = this.props;
     const mapProps = {
       customClass: className,
       mapOptions: {
-        zoom: 12,
+        zoom: viewport.zoom,
         center: {
-          lat: 41.145218001222204,
-          lng: -8.61132408966133
+          lat: viewport.latitude,
+          lng: viewport.longitude
         }
       },
       events: {

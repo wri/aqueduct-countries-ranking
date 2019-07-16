@@ -1,16 +1,7 @@
 export default {
-  settings: {
-    isFlying: false,
-    isLoaded: false
-  },
   viewport: {
-    width: '400px',
-    height: '300px',
     zoom: 2,
-    minZoom: 2,
-    latitude: 20,
-    longitude: 0,
-  },
-  bounds: {},
-  mapStyle: 'mapbox://styles/mapbox/streets-v11'
+    latitude: 41.145218001222204,
+    longitude: -8.61132408966133,
+  }
 };
