@@ -70,7 +70,7 @@ class WRIService {
         .then(response => {
           const { status, statusText, data } = response;
           if (status >= 400) throw new Error(statusText);
-          return aggregateByKey(data.rows, 'iso', row => ({
+          return aggregateByKey(data.rows, options.indexKey, row => ({
             country: row.country,
             category: row.weight,
             score: row.score,

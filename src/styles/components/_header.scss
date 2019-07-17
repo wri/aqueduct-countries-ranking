@@ -23,6 +23,17 @@ $text-color: #AFC7FF;
 
   .header--content {
     padding: 32px 52px;
+    color: palette(white);
+  }
+
+  .header--indicators {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+
+    li {
+      display: inline-block;
+    }
   }
 
   .-uppercase {

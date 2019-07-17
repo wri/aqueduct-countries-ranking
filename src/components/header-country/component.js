@@ -5,8 +5,9 @@ import { Icon } from 'vizzuality-components';
 
 import IndicatorSelector from 'components/indicator-selector';
 
-const HeaderCountry = ({ onBackClick, country }) => {
+const HeaderCountry = ({ onBackClick, data }) => {
   const backClickHandler = () => onBackClick();
+
   return (
     <header className="c-header">
       <div className="header--back-button" onClick={backClickHandler}>
@@ -15,10 +16,14 @@ const HeaderCountry = ({ onBackClick, country }) => {
       </div>
       <div className="header--content">
         <div>
-          <h1>{country[0].country}</h1>
-          <div className="header--indicators">
-            <span className="header--indicator"><span className="-bold"></span></span>
-          </div>
+          <h1>{data.name}</h1>
+          <ul className="header--indicators">
+            {Object.entries(data.indicators).map(indicator => (
+              <li className="header--indicator" key={indicator[0]}>
+                {indicator[1].name}: {indicator[1].score}
+              </li>
+            ))}
+          </ul>
         </div>
         <IndicatorSelector className="header--indicator-selector"/>
       </div>

@@ -14,12 +14,13 @@ export const INDICATORS = [
 ];
 
 export const INDICATOR_CATEGORIES = {
-  'Tot': 'Total gross withdrawal',
-  'Dom': 'Domestic gross withdrawal',
-  'Ind': 'Industrial gross withdrawal',
-  'Irr': 'Irrigation gross withdrawal',
-  'Liv': 'Livestock gross withdrawal',
+  'Tot': 'Total',
+  'Dom': 'Domestic',
+  'Ind': 'Industrial',
+  'Irr': 'Agricultural',
+  'Liv': 'Livestock',
   'Pop': 'Population',
+  'Avg': 'Average'
 };
 
 export const ERRORS = {

@@ -6,6 +6,8 @@ import {
   setLocation
 } from 'modules/dashboard/actions';
 
+import { getWidgetData } from 'modules/data/actions';
+
 export const setDashboardCollapsed = createAction('APP/setDashboardCollapsed');
 
 export const setCountry = createThunkAction('APP/setCountry', payload => dispatch => {
@@ -15,5 +17,6 @@ export const setCountry = createThunkAction('APP/setCountry', payload => dispatc
 
 export const setIndicator = createThunkAction('APP/setIndicator', payload => dispatch => {
   dispatch(setIndicatorValue(payload));
+  dispatch(getWidgetData())
 });
 
