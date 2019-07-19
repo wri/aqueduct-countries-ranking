@@ -1,0 +1,18 @@
+.c-widget {
+  display: table;
+  justify-content: space-between;
+
+  >* {
+    display: table-cell;
+  }
+
+  .widget--row-number {
+    display: table-cell;
+    padding: 20px;
+  }
+
+  .widget--total {
+    display: table-cell;
+    text-align: center;
+  }
+}

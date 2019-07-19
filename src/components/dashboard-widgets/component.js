@@ -1,28 +1,65 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-import { INDICATOR_CATEGORIES }  from 'services/wri-service/constants';
+import Widget from 'components/widget';
+import Bar from 'components/bar';
 
-const DashboardWidgets = ({data}) => {
+const DashboardWidgets = ({title, buttonText, data}) => {
+  if (data.length === 0) {
+    return null;
+  }
+
+  const palette = ['#3FA989', '#00A0E1', '#4A596A'];
+  const chartOrder = ['Irr', 'Dom', 'Ind', 'Pop'];
+
+  const headerIndicators = Object.entries(data[0].indicators)
+    .filter(data => chartOrder.includes(data[0]))
+    .sort((a, b) => chartOrder.indexOf(a[0]) - chartOrder.indexOf(b[0]));
+
+  const indicatorsLegend = headerIndicators.map((data, i) => (
+    <div className="widgets--content-legend" key={data}>
+      <Bar className="widgets--content-bullet" fill={palette[i]} />
+      {data[1].name}
+    </div>
+  ));
+
   return (
-    <div style={{ overflowY: 'scroll' }}>
-      <h2>Here will be the widget. But for now...</h2>
-      {data.map((country, index) => {
-        return (
-          <div key={country.iso}>
-            <b>{index + 1}. </b>
-            <span>{country.name}</span>
-            <br />
-            <div>
-              <span>{`${INDICATOR_CATEGORIES['Dom']} :${country.indicators['Dom'].score}`}</span><br />
-              <span>{`${INDICATOR_CATEGORIES['Ind']} :${country.indicators['Ind'].score}`}</span><br />
-              <span>{`${INDICATOR_CATEGORIES['Irr']} :${country.indicators['Irr'].score}`}</span><br />
-              <span>{`${INDICATOR_CATEGORIES['Tot']} :${country.indicators['Tot'].rank}`}</span>
-              </div>
-          </div>
-        );
-      })}
+    <div className="c-widgets">
+      <div className="widgets--header">
+        <span className="-uppercase">{title}</span>
+        <button type="button">{buttonText}</button>
+      </div>
+      <div className="widgets--content-wrapper">
+        <div className="widgets--content-header">
+          <div>{indicatorsLegend}</div>
+          <div>Total</div>
+        </div>
+        <div className="widgets--content-body">
+        {data.map((country, index) => {
+          return (
+              <Widget
+                className="widgets--content-row"
+                key={country.iso}
+                rowNumber={index + 1}
+                country={country}
+              />
+          );
+        })}
+        </div>
+      </div>
     </div>
   );
+};
+
+DashboardWidgets.propTypes = {
+  title: PropTypes.string,
+  buttonText: PropTypes.string,
+  data: PropTypes.arrayOf(PropTypes.shape({})).isRequired
+};
+
+DashboardWidgets.defaultProps = {
+  title: 'Water Usage (Score)',
+  buttonText: 'Download ranking'
 };
 
 export default DashboardWidgets;
