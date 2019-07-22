@@ -1,12 +1,15 @@
 import { createSelector } from 'reselect';
+import { currentLocation } from 'modules/dashboard/selectors';
 
 const layers = state => state.layers.list;
 
 export const getActiveLayers = createSelector(
-  [layers], (_layers) => {
+  [layers, currentLocation],
+  (_layers, _currentLocation) => {
     if (!_layers) {
       return [];
     }
+    console.log(_currentLocation);
     // First we flatten the layers
     const flatLayers = Object.values(_layers).reduce((acc, layerGroup) => [...acc, ...layerGroup], []);
 

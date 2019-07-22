@@ -15,6 +15,7 @@ export const getLayers = createThunkAction('LAYERS/getLayers', () => dispatch =>
 
   return WRIService.fetchDatasetsLayers(datasets)
     .then(layers => {
+      console.log(layers)
       dispatch(setList(layers));
       dispatch(setLoading(false));
     })

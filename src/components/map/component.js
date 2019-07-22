@@ -80,6 +80,8 @@ class Map extends Component {
       }
     };
 
+    console.log(layers)
+
     // NOTE: We need to prefix icon name with 'icon-' because Icon from vizzuality
     // does not do that automatically but Icon from aqueduct does.
     return (
