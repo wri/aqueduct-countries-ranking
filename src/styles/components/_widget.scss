@@ -1,18 +1,32 @@
 .c-widget {
   display: table;
+  align-items: center;
   justify-content: space-between;
-
-  >* {
-    display: table-cell;
-  }
 
   .widget--row-number {
     display: table-cell;
     padding: 20px;
+    max-width: 61px;
+  }
+
+  .widget--name {
+    display: table-cell;
+    width: 271px;
+  }
+
+  .widget--chart {
+    display: table-cell;
   }
 
   .widget--total {
     display: table-cell;
-    text-align: center;
+    padding-right: 46px;
+    width: 86px;
+  }
+
+  .widget--chart-text {
+    font-size: $font-size-small;
+    color: rgba(#758290, 0.6);
+    margin-right: 6px;
   }
 }

@@ -23,6 +23,12 @@ const DashboardWidgets = ({title, buttonText, data}) => {
     </div>
   ));
 
+  const chartConfig = {
+    fields: chartOrder,
+    palette,
+    length: value => (value / 5) * 76
+  };
+
   return (
     <div className="c-widgets">
       <div className="widgets--header">
@@ -42,6 +48,7 @@ const DashboardWidgets = ({title, buttonText, data}) => {
                 key={country.iso}
                 rowNumber={index + 1}
                 country={country}
+                chartConfig={chartConfig}
               />
           );
         })}

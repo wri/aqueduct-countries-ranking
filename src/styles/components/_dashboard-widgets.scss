@@ -58,18 +58,14 @@
   }
 
   .widgets--content-body {
-    display: table;
     width: 100%;
   }
-  // .widgets--content-body {
-    // overflow-y: scroll;
-  // }
 
   .widgets--content-row {
+    display: flex;
     position: relative;
     color: palette(gray, dark);
     font-size: $font-size-huge;
-    display: table-row;
     width: 100%;
 
     &:after {

@@ -11,7 +11,8 @@ import {
   // setCountryValue,
   setIndicators,
   setIndicatorValue,
-  setWidgetData
+  setWidgetData,
+  setWidgetStats
 } from 'modules/dashboard/actions';
 
 export const setCountriesData = createAction('DATA/setCountriesData');
@@ -27,7 +28,11 @@ export const setCountriesData = createAction('DATA/setCountriesData');
  export const loadDashboardData = createThunkAction('DATA/loadDashboardData', () => dispatch => {
   dispatch(getIndicators());
   dispatch(getWidgetData()).then(data => {
-    const countries4widget = Object.entries(data).map(entry => processCountry(entry[0], entry[1]));
+    const countries4widget = Object.entries(data)
+      .filter(entry => entry[0] !== '_stats')
+      .map(entry => processCountry(entry[0], entry[1]));
+
+    dispatch(setWidgetStats({data: data._stats}));
     dispatch(setWidgetData({data: countries4widget}));
   });
 });
@@ -65,12 +70,14 @@ export const getWidgetData = createThunkAction('DATA/getWidgetData', () => async
 
   return await WRIService.fetchDatasetWidgets(options)
   .then(res => {
-    const countries = Object.entries(res).map(
-      country => ({
-        label: country[1][0].country,
-        value: country[0],
-      })
-    );
+    const countries = Object.entries(res)
+      .filter(entry => entry[0] !== '_stats')
+      .map(
+        country => ({
+          label: country[1][0].country,
+          value: country[0],
+        })
+      );
     dispatch(setCountries({data: countries}));
     dispatch(setCountriesData({data: res}));
     return res;

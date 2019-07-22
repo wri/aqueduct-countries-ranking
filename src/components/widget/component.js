@@ -1,22 +1,45 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-import { INDICATOR_CATEGORIES }  from 'services/wri-service/constants';
+import Bar from 'components/bar';
 
-const Widget = ({className, rowNumber, country}) => {
+const Chart = ({indicators, config: {fields, palette, length}}) => {
+  if (!indicators) {
+    return null;
+  }
+
+  const fill = (palette, index) => palette[index % palette.length];
+
+  return (
+    <Fragment>
+      {fields.map((field, index) => {
+        if (!indicators[field]) {
+          return null;
+        }
+
+        const value = indicators[field].score;
+
+        return (
+          <div key={field}>
+            <span className='widget--chart-text'>{`${value}`}</span>
+            <Bar fill={fill(palette, index)} width={`${length(value)}px`} />
+          </div>
+        );
+      })}
+    </Fragment>
+  );
+};
+
+const Widget = ({className, rowNumber, country, chartConfig}) => {
   return (
     <div className={classnames('c-widget', { [className]: Boolean(className)})}>
       <div className="widget--row-number">{rowNumber}</div>
       <div className="widget--name">{country.name}</div>
       <div className="widget--chart">
-        <div>
-          <span>{`${INDICATOR_CATEGORIES['Dom']} :${country.indicators['Dom'].score}`}</span><br />
-          <span>{`${INDICATOR_CATEGORIES['Ind']} :${country.indicators['Ind'].score}`}</span><br />
-          <span>{`${INDICATOR_CATEGORIES['Irr']} :${country.indicators['Irr'].score}`}</span><br />
-        </div>
+        <Chart indicators={country.indicators} config={chartConfig} />
       </div>
-      <div className="widget--total">{country.indicators['Tot'].score}</div>
+      <div className="widget--total">{country.indicators && country.indicators['Tot'] && country.indicators['Tot'].score}</div>
     </div>
   );
 };
