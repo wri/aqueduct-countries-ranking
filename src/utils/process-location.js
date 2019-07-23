@@ -35,12 +35,12 @@ function getIndicators(data) {
  * @param {string} iso - Identifier
  * @param {*} data - Object where indicators are keys.
  */
-export const processCountry = (iso, data) => {
+export function processLocation(iso, data, nameProp='country') {
   return {
     iso,
-    name: data[0].country,
+    name: data[0][nameProp],
     indicators: getIndicators(data)
   };
 }
 
-export default processCountry;
+export default processLocation;

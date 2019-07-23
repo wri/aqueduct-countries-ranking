@@ -71,7 +71,7 @@ class WRIService {
           const { status, statusText, data } = response;
           if (status >= 400) throw new Error(statusText);
           return aggregateByKey(data.rows, options.indexKey, row => ({
-            country: row.country,
+            country: (options.indexKey === 'iso') ? row.country : row.province,
             category: row.weight,
             score: row.score,
             rank: row.score_ranked

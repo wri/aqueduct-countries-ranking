@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import processCountry from 'utils/process-country';
+import processLocation from 'utils/process-location';
 
 const dashboard = state => state.dashboard;
 const data = state => state.data;
@@ -10,6 +10,6 @@ export const currentLocation = createSelector([dashboard], _dashboard => _dashbo
 export const getCountryData = createSelector(
   [currentLocation, countries],
   (_currentLocation, _countries) => _currentLocation
-    ? processCountry(_currentLocation, _countries[_currentLocation])
+    ? processLocation(_currentLocation, _countries[_currentLocation])
     : null
 );
