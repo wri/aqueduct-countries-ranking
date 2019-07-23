@@ -1,10 +1,9 @@
 import { createAction, createThunkAction } from 'vizzuality-redux-tools';
 
 import WRIService from 'services/wri-service';
-import processCountry from 'utils/process-country';
+import processLocation from 'utils/process-location';
 
 import { INDICATORS } from 'services/wri-service/constants';
-import { SCOPE } from 'modules/dashboard/constants';
 
 import {
   setCountries,
@@ -27,10 +26,10 @@ export const setCountriesData = createAction('DATA/setCountriesData');
 
  export const loadDashboardData = createThunkAction('DATA/loadDashboardData', () => dispatch => {
   dispatch(getIndicators());
-  dispatch(getWidgetData()).then(data => {
+  dispatch(getCountriesData()).then(data => {
     const countries4widget = Object.entries(data)
       .filter(entry => entry[0] !== '_stats')
-      .map(entry => processCountry(entry[0], entry[1]));
+      .map(entry => processLocation(entry[0], entry[1]));
 
     dispatch(setWidgetStats({data: data._stats}));
     dispatch(setWidgetData({data: countries4widget}));
@@ -43,29 +42,18 @@ export const getIndicators = createThunkAction('DATA/getIndicators', () => dispa
   dispatch(setIndicatorValue({data: INDICATORS[0].value}));
 });
 
-export const getWidgetData = createThunkAction('DATA/getWidgetData', () => async (dispatch, state) => {
+export const getCountriesData = createThunkAction('DATA/getCountriesData', () => async (dispatch, state) => {
   const dashboard = state().dashboard;
-  const { scope, locationId, indicators: { value: indicator }} = dashboard;
+  const { indicators: { value: indicator }} = dashboard;
   
   if (!indicator) return;
 
-  const widgetIds = {
-    [SCOPE.GENERAL]: 'e6e5d286-212b-48d8-b5f4-1678cded82bc',
-    [SCOPE.COUNTRY]: '4b3d6e89-869c-45b6-88e3-28735d2b60fe'
-  };
-
-  const params = { indicator };
-
-  if (scope === SCOPE.COUNTRY) {
-    params.iso = locationId;
-  }
-
   const options = {
     widget: {
-      id: widgetIds[scope],
-      params
+      id: 'e6e5d286-212b-48d8-b5f4-1678cded82bc',
+      params: { indicator }
     },
-    indexKey: (scope === SCOPE.GENERAL) ? 'iso' : 'province'
+    indexKey: 'iso'
   };
 
   return await WRIService.fetchDatasetWidgets(options)
@@ -77,20 +65,42 @@ export const getWidgetData = createThunkAction('DATA/getWidgetData', () => async
           label: country[1][0].country,
           value: country[0],
         })
-      );
+      ).sort((a,b) => {
+        if (a.label && b.label) {
+          return a.label.localeCompare(b.label);
+        }
+  
+        return -1;
+      });
+
     dispatch(setCountries({data: countries}));
+    // These will be used for Country headers
     dispatch(setCountriesData({data: res}));
     return res;
   })
-  .catch((err) => {
-    // dispatch(setError(err));
-    // dispatch(setLoading(false));
-  });
+});
+
+export const getProvincesData = createThunkAction('DATA/getProvincesData', () => async (dispatch, state) => {
+  const dashboard = state().dashboard;
+  const { locationId, indicators: { value: indicator }} = dashboard;
+  
+  if (!indicator) return;
+
+  const options = {
+    widget: {
+      id: '4b3d6e89-869c-45b6-88e3-28735d2b60fe',
+      params: { indicator, iso: locationId }
+    },
+    indexKey: 'province'
+  };
+
+  return await WRIService.fetchDatasetWidgets(options);
 });
 
 
 
 export default {
   getIndicators,
-  getWidgetData
+  getCountriesData,
+  getProvincesData
 };
