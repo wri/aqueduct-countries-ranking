@@ -1,1 +1,0 @@
-SELECT ST_AsGeoJSON(ST_AsText(ST_Envelope(ST_Collect(the_geom)))) as geometry, gid_0 FROM gadm_wri WHERE gid_0 = 'QAT' GROUP BY gid_0 ORDER BY gid_0

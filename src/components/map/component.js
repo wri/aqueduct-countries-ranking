@@ -47,22 +47,22 @@ class Map extends Component {
     layers: []
   }
 
-  componentDidMount() {
-    const { bounds } = this.props;
+  // componentDidMount() {
+  //   const { bounds } = this.props;
 
-    if (!isEmpty(bounds) && !!bounds.bbox) {
-      this.fitBounds();
-    }
-  }
+  //   if (!isEmpty(bounds) && !!bounds.bbox) {
+  //     this.fitBounds();
+  //   }
+  // }
 
-  componentDidUpdate(prevProps) {
-    const { bounds: prevBounds } = prevProps;
-    const { bounds } = this.props;
+  // componentDidUpdate(prevProps) {
+  //   const { bounds: prevBounds } = prevProps;
+  //   const { bounds } = this.props;
 
-    if (!isEmpty(bounds) && !isEqual(bounds, prevBounds)) {
-      this.fitBounds();
-    }
-  }
+  //   if (!isEmpty(bounds) && !isEqual(bounds, prevBounds)) {
+  //     this.fitBounds();
+  //   }
+  // }
 
   render() {
     const { className = '', viewport, layers } = this.props;
