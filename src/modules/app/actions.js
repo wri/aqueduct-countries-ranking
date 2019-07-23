@@ -1,5 +1,6 @@
 import { createAction, createThunkAction } from 'vizzuality-redux-tools';
 
+import exportService from 'services/export-service';
 import processLocation from 'utils/process-location';
 
 import {
@@ -40,5 +41,16 @@ export const setIndicator = createThunkAction('APP/setIndicator', payload => dis
     dispatch(setWidgetStats({data: data._stats}));
     dispatch(setWidgetData({data: provinces4widget}));
   });
+});
+
+export const saveData = createThunkAction('APP/saveData', ({type, data}) => dispatch => {
+  switch(type) {
+    case 'csv':
+      exportService.saveAsCSV(data);
+      break;
+    case 'json':
+    default:
+      exportService.saveAsJSON(data);
+  }
 });
 

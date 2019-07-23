@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { setCountry } from 'modules/app/actions';
+import { setCountry, saveData } from 'modules/app/actions';
 import { loadDashboardData } from 'modules/data/actions';
 import { getCountryData } from 'modules/dashboard/selectors';
 
@@ -14,7 +14,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   loadDashboardData,
-  setCountry
+  setCountry,
+  saveData
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

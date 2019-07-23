@@ -12,6 +12,7 @@ const Dashboard = ({
   headerData,
   widgetsData,
   setCountry,
+  saveData,
   loadDashboardData
 }) => {
   useEffect(() => {
@@ -26,7 +27,7 @@ const Dashboard = ({
         <HeaderGeneral /> :
         <HeaderCountry data={headerData} onBackClick={backClickHandler} />
       }
-      <DashboardWidgets data={widgetsData} />
+      <DashboardWidgets data={widgetsData} onSelect={saveData} />
       <Footer scope={scope} />
     </div>
   );
