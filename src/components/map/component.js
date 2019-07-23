@@ -65,7 +65,7 @@ class Map extends Component {
   // }
 
   render() {
-    const { className = '', viewport, layers } = this.props;
+    const { className = '', viewport, layers, bounds } = this.props;
     const mapProps = {
       customClass: className,
       mapOptions: {
@@ -86,6 +86,8 @@ class Map extends Component {
       dataset: l.dataset,
       layers: [{...l, active: true}]
     })) : [];
+
+    console.log(bounds)
     
     // NOTE: We need to prefix icon name with 'icon-' because Icon from vizzuality
     // does not do that automatically but Icon from aqueduct does.
