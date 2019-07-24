@@ -8,13 +8,14 @@ import {
   Icon,
   Legend,
   LegendListItem,
-  LegendItemTypes
+  LegendItemTypes,
+  MapPopup
 } from 'vizzuality-components';
 
 import { PluginLeaflet } from 'layer-manager';
 import { LayerManager, Layer } from 'layer-manager/dist/components';
 
-import { BASEMAP_CONFIG, LABEL_LAYER_CONFIG } from './constants';
+import { BASEMAP_CONFIG } from './constants';
 
 class Map extends Component {
   static propTypes = {
@@ -46,22 +47,10 @@ class Map extends Component {
     layers: []
   }
 
-  // componentDidMount() {
-  //   const { bounds } = this.props;
-
-  //   if (!isEmpty(bounds) && !!bounds.bbox) {
-  //     this.fitBounds();
-  //   }
-  // }
-
-  // componentDidUpdate(prevProps) {
-  //   const { bounds: prevBounds } = prevProps;
-  //   const { bounds } = this.props;
-
-  //   if (!isEmpty(bounds) && !isEqual(bounds, prevBounds)) {
-  //     this.fitBounds();
-  //   }
-  // }
+  state = {
+    latlng: null,
+    interactions: {}
+  }
 
   render() {
     const { className = '', viewport, layers, bounds } = this.props;
@@ -76,7 +65,6 @@ class Map extends Component {
       },
       bounds,
       basemap: BASEMAP_CONFIG,
-      label: LABEL_LAYER_CONFIG,
       events: {
         zoomend: (e, map) => { /*console.info(e, map);*/ },
         dragend: (e, map) => { /*console.info(e, map);*/ }
@@ -104,7 +92,21 @@ class Map extends Component {
                 onReady={() => { /*if (loading) setLoading(false);*/ }}
             >
               {layers.map(layer => (
-                <Layer key={layer.id} {...layer} />
+                <Layer
+                  key={layer.id}
+                  {...layer}
+                  {...!!layer.interactionConfig && !!layer.interactionConfig.output && !!layer.interactionConfig.output.length && {
+                    interactivity: (layer.provider === 'carto' || layer.provider === 'cartodb') ? layer.interactionConfig.output.map(o => o.column) : true,
+                    events: {
+                      click: (e) => {
+                        this.setState({
+                          interactions: { ...this.state.interactions, [layer.id]: e },
+                          latlng: e.latlng
+                        })
+                      }
+                    }
+                  }}
+                />
               ))}
             </LayerManager>
             <MapControls>
@@ -112,6 +114,24 @@ class Map extends Component {
               <Icon className="-medium" name="icon-share" />
               {/* <Icon className="-medium" name="icon-download" /> */}
             </MapControls>
+            <MapPopup
+              map={_map}
+              latlng={this.state.latlng}
+              data={{
+                latlng: this.state.latlng,
+                interactions: this.state.interactions
+              }}
+            >
+              {
+                (this.state.interactions) &&
+                  Object.keys(this.state.interactions).map(k => (
+                    <div key={this.state.interactions[k].data.name_0}>
+                      <h3>{this.state.interactions[k].data.name_0}</h3>
+                      <div>{this.state.interactions[k].data.label}</div>
+                    </div>
+                  ))
+              }  
+            </MapPopup>
             <div className="c-legend">
               <Legend sortable={false}>
                 {layerGroups.map((lg, i) => (
