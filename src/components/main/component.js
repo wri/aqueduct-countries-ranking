@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Sidebar } from 'aqueduct-components';
+import classnames from 'classnames';
 
 import Dashboard from 'components/dashboard';
 import Map from 'components/map';
@@ -24,7 +25,7 @@ class Main extends Component {
           <Dashboard />
         </Sidebar>
         <div className="map-wrapper">
-          <Map className="c-aqueduct-map" />
+          <Map className={classnames('c-aqueduct-map', { '-half-width': !isDashboardCollapsed})} />
         </div>
       </main>
     );

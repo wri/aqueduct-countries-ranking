@@ -74,6 +74,7 @@ class Map extends Component {
           lng: viewport.longitude
         }
       },
+      bounds,
       basemap: BASEMAP_CONFIG,
       label: LABEL_LAYER_CONFIG,
       events: {
@@ -92,7 +93,10 @@ class Map extends Component {
     // does not do that automatically but Icon from aqueduct does.
     return (
       <LeMap {...mapProps}>
-        {_map => (
+        {_map => {
+          window.m = _map;
+
+          return (
           <Fragment>
             <LayerManager
                 map={_map}
@@ -122,7 +126,7 @@ class Map extends Component {
               </Legend>
             </div>
           </Fragment>
-        )}
+        )}}
       </LeMap>
     );
   }
