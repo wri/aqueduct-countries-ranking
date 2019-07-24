@@ -14,6 +14,8 @@ import {
 import { PluginLeaflet } from 'layer-manager';
 import { LayerManager, Layer } from 'layer-manager/dist/components';
 
+import { BASEMAP_CONFIG, LABEL_LAYER_CONFIG } from './constants';
+
 class Map extends Component {
   static propTypes = {
     children: PropTypes.func,
@@ -72,6 +74,8 @@ class Map extends Component {
           lng: viewport.longitude
         }
       },
+      basemap: BASEMAP_CONFIG,
+      label: LABEL_LAYER_CONFIG,
       events: {
         zoomend: (e, map) => { /*console.info(e, map);*/ },
         dragend: (e, map) => { /*console.info(e, map);*/ }
