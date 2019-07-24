@@ -19,7 +19,6 @@ export const getCountryBounds = createThunkAction('MAP/getCountryBounds', () => 
       const theGeom = JSON.parse(result.data.rows[0].geometry);
       const bounds = window.L.geoJSON(theGeom).getBounds();
       const bbox = bounds.toBBoxString().split(',').map(b => parseFloat(b));
-      console.log(bbox)
       dispatch(setMapBounds({ bbox }))
     });
 });
