@@ -14,9 +14,6 @@ import {
 import { PluginLeaflet } from 'layer-manager';
 import { LayerManager, Layer } from 'layer-manager/dist/components';
 
-import isEqual from 'lodash/isEqual';
-import isEmpty from 'lodash/isEmpty';
-
 class Map extends Component {
   static propTypes = {
     children: PropTypes.func,
@@ -87,8 +84,6 @@ class Map extends Component {
       layers: [{...l, active: true}]
     })) : [];
 
-    console.log(bounds)
-    
     // NOTE: We need to prefix icon name with 'icon-' because Icon from vizzuality
     // does not do that automatically but Icon from aqueduct does.
     return (

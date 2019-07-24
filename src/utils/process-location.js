@@ -11,16 +11,20 @@ function getAverage(data) {
       : acc + indicator.score, 0);
 }
 
-function getIndicators(data) {
-  if (data.every(indicator => indicator.score === null)) {
-    return null;
+function setScore(score) {
+  if (!score) {
+    return 'NO DATA';
   }
 
+  return score.toFixed(2);
+}
+
+function getIndicators(data) {
   return data.reduce((acc, indicator) => ({
     ...acc,
     [indicator.category]: {
       name: INDICATOR_CATEGORIES[indicator.category],
-      score: indicator.score && indicator.score.toFixed(2),
+      score: setScore(indicator.score),
       rank: indicator.rank
     },
     Avg: {

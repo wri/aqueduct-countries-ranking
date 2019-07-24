@@ -21,7 +21,8 @@
   .widget--total {
     display: table-cell;
     padding-right: 46px;
-    width: 86px;
+    min-width: 86px;
+    text-align: center;
   }
 
   .widget--chart-text {
