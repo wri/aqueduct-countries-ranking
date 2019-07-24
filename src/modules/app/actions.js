@@ -12,6 +12,7 @@ import {
 } from 'modules/dashboard/actions';
 
 import { getCountriesData, getProvincesData } from 'modules/data/actions';
+import { setMapBounds } from 'modules/map/actions';
 
 export const setDashboardCollapsed = createAction('APP/setDashboardCollapsed');
 
@@ -29,6 +30,10 @@ export const setCountry = createThunkAction('APP/setCountry', payload => dispatc
     dispatch(setWidgetStats({data: data._stats}));
     dispatch(setWidgetData({data: countries4widget}));
   });
+
+  if (!payload.data) {
+    dispatch(setMapBounds({bbox: [-180, 90, 180, -90]}));
+  }
 });
 
 export const setIndicator = createThunkAction('APP/setIndicator', payload => dispatch => {
