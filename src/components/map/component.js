@@ -7,7 +7,8 @@ import {
   ZoomControl,
   Icon,
   Legend,
-  // LegendListItem
+  LegendListItem,
+  LegendItemTypes
 } from 'vizzuality-components';
 
 import { PluginLeaflet } from 'layer-manager';
@@ -46,25 +47,25 @@ class Map extends Component {
     layers: []
   }
 
-  componentDidMount() {
-    const { bounds } = this.props;
+  // componentDidMount() {
+  //   const { bounds } = this.props;
 
-    if (!isEmpty(bounds) && !!bounds.bbox) {
-      this.fitBounds();
-    }
-  }
+  //   if (!isEmpty(bounds) && !!bounds.bbox) {
+  //     this.fitBounds();
+  //   }
+  // }
 
-  componentDidUpdate(prevProps) {
-    const { bounds: prevBounds } = prevProps;
-    const { bounds } = this.props;
+  // componentDidUpdate(prevProps) {
+  //   const { bounds: prevBounds } = prevProps;
+  //   const { bounds } = this.props;
 
-    if (!isEmpty(bounds) && !isEqual(bounds, prevBounds)) {
-      this.fitBounds();
-    }
-  }
+  //   if (!isEmpty(bounds) && !isEqual(bounds, prevBounds)) {
+  //     this.fitBounds();
+  //   }
+  // }
 
   render() {
-    const { className = '', viewport, layers } = this.props;
+    const { className = '', viewport, layers, bounds } = this.props;
     const mapProps = {
       customClass: className,
       mapOptions: {
@@ -79,7 +80,15 @@ class Map extends Component {
         dragend: (e, map) => { /*console.info(e, map);*/ }
       }
     };
+    
+    const layerGroups = (layers && layers.length) ? layers.map(l => ({
+      name: l.name,
+      dataset: l.dataset,
+      layers: [{...l, active: true}]
+    })) : [];
 
+    console.log(bounds)
+    
     // NOTE: We need to prefix icon name with 'icon-' because Icon from vizzuality
     // does not do that automatically but Icon from aqueduct does.
     return (
@@ -98,10 +107,21 @@ class Map extends Component {
             <MapControls>
               <ZoomControl map={_map} />
               <Icon className="-medium" name="icon-share" />
-              <Icon className="-medium" name="icon-download" />
+              {/* <Icon className="-medium" name="icon-download" /> */}
             </MapControls>
-            <Legend>
-            </Legend>
+            <div className="c-legend">
+              <Legend sortable={false}>
+                {layerGroups.map((lg, i) => (
+                  <LegendListItem
+                    index={i}
+                    key={lg.dataset}
+                    layerGroup={lg}
+                  >
+                    <LegendItemTypes />
+                  </LegendListItem>
+                ))}
+              </Legend>
+            </div>
           </Fragment>
         )}
       </LeMap>

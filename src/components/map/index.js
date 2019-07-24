@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { setMapViewport, setMapBounds, setMapLoaded, setMapFlying } from 'modules/map/actions';
 
 import Map from './component';
-import { getActiveLayers } from './selectors';
+import { getActiveLayers } from 'modules/layers/selectors';
 
 const mapStateToProps = state => ({
   ...state.map,
