@@ -19,6 +19,12 @@ export function aggregateByKey(collection, key, mapFn = x => x) {
     const rowKey = get(row, key);
     const rowValue = mapFn(row);
 
+    const name = (key === 'iso') ? row.country : row.province;
+
+    if (!name) {
+      return acc;
+    }
+
     if (row.score) {
       stats.length++;
       stats.sum += row.score;
