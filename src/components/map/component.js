@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
+import LegendTypeChoropleth from '../legend-type-choropleth';
 
 import {
   Map as LeMap,
@@ -112,7 +113,9 @@ class Map extends Component {
                     key={lg.dataset}
                     layerGroup={lg}
                   >
-                    <LegendItemTypes />
+                    <LegendItemTypes>
+                      <LegendTypeChoropleth />
+                    </LegendItemTypes>
                   </LegendListItem>
                 ))}
               </Legend>
