@@ -31,15 +31,15 @@ const Chart = ({indicators, config: {fields, palette, length}}) => {
   );
 };
 
-const Widget = ({className, rowNumber, country, chartConfig}) => {
+const Widget = ({classes, rowNumber, country, chartConfig}) => {
   return (
-    <div className={classnames('c-widget', { [className]: Boolean(className)})}>
-      <div className="widget--row-number">{rowNumber}</div>
-      <div className="widget--name">{country.name}</div>
-      <div className="widget--chart">
+    <div className={classnames('c-widget', { [classes.row]: Boolean(classes.row)})}>
+      <div className={classes.columns[0]}>{rowNumber}</div>
+      <div className={classes.columns[1]}>{country.name}</div>
+      <div className={classes.columns[2]}>
         <Chart indicators={country.indicators} config={chartConfig} />
       </div>
-      <div className="widget--total">{country.indicators && country.indicators['Tot'] && country.indicators['Tot'].score}</div>
+      <div className={classes.columns[3]}>{country.indicators && country.indicators['Tot'] && country.indicators['Tot'].score}</div>
     </div>
   );
 };

@@ -3,28 +3,6 @@
   align-items: center;
   justify-content: space-between;
 
-  .widget--row-number {
-    display: table-cell;
-    padding: 20px;
-    max-width: 61px;
-  }
-
-  .widget--name {
-    display: table-cell;
-    width: 271px;
-  }
-
-  .widget--chart {
-    display: table-cell;
-  }
-
-  .widget--total {
-    display: table-cell;
-    padding-right: 46px;
-    min-width: 86px;
-    text-align: center;
-  }
-
   .widget--chart-text {
     font-size: $font-size-small;
     color: rgba(#758290, 0.6);

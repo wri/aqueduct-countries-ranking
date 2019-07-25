@@ -39,6 +39,16 @@ const DashboardWidgets = ({title, buttonText, data, onSelect}) => {
     onSelect({type: value, data});
   };
 
+  const tableClasses = {
+    row: 'widgets--content-row',
+    columns: [
+      'widgets--row-number',
+      'widgets--name',
+      'widgets--chart',
+      'widgets--total'
+    ]
+  };
+
   return (
     <div className="c-widgets">
       <div className="widgets--header">
@@ -53,14 +63,16 @@ const DashboardWidgets = ({title, buttonText, data, onSelect}) => {
       </div>
       <div className="widgets--content-wrapper">
         <div className="widgets--content-header">
-          <div>{indicatorsLegend}</div>
-          <div>Total</div>
+          <div className={tableClasses.columns[0]}>Rank</div>
+          <div className={tableClasses.columns[1]}>Name</div>
+          <div className={tableClasses.columns[2]}>Sectoral Score{indicatorsLegend}</div>
+          <div className={tableClasses.columns[3]}>Total Score</div>
         </div>
         <div className="widgets--content-body">
         {data.map((country, index) => {
           return (
               <Widget
-                className="widgets--content-row"
+                classes={tableClasses}
                 key={country.iso}
                 rowNumber={index + 1}
                 country={country}

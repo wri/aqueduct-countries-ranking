@@ -6,6 +6,28 @@
   .widgets--content-wrapper {
     background-color: palette(white);
     box-shadow: 0 0 2px 0 rgba(0,0,0,0.26);
+
+    .widgets--row-number {
+      display: table-cell;
+      padding: 20px;
+      max-width: 61px;
+    }
+  
+    .widgets--name {
+      display: table-cell;
+      width: 271px;
+    }
+  
+    .widgets--chart {
+      display: table-cell;
+    }
+  
+    .widgets--total {
+      display: table-cell;
+      padding-right: 46px;
+      min-width: 86px;
+      text-align: center;
+    }  
   }
 
   .widgets--header {
@@ -42,13 +64,12 @@
 
   .widgets--content-header {
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    padding: 18px 46px 20px 25px;
     border-bottom: 1px solid #F2F2F2;
 
     .widgets--content-legend {
-      display: inline-block;
-      margin-right: 25px;
+      display: block;
   
       .widgets--content-bullet {
         margin-right: 7px;
