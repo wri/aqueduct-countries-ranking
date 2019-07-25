@@ -1,14 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import DropdownButton from 'components/dropdown-button';
 import Widget from 'components/widget';
 import Bar from 'components/bar';
-
-const downloadOptions = [
-  { label: 'Download CSV', value: 'csv' },
-  { label: 'Download JSON', value: 'json' }
-];
 
 const DashboardWidgets = ({title, buttonText, data, onSelect}) => {
   if (data.length === 0) {
@@ -35,10 +29,6 @@ const DashboardWidgets = ({title, buttonText, data, onSelect}) => {
     length: value => (value / 5) * 76
   };
 
-  const selectHandler = ({value}) => {
-    onSelect({type: value, data});
-  };
-
   const tableClasses = {
     row: 'widgets--content-row',
     columns: [
@@ -53,13 +43,7 @@ const DashboardWidgets = ({title, buttonText, data, onSelect}) => {
     <div className="c-widgets">
       <div className="widgets--header">
         <span className="-uppercase">{title}</span>
-        <DropdownButton
-          dropdownClassName="-bottom -left"
-          options={downloadOptions}
-          onSelect={selectHandler}
-        >
-          <button type="button">{buttonText}</button>
-        </DropdownButton>
+        <button type="button" onClick={onSelect}>{buttonText}</button>
       </div>
       <div className="widgets--content-wrapper">
         <div className="widgets--content-header">

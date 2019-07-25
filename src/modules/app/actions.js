@@ -48,14 +48,7 @@ export const setIndicator = createThunkAction('APP/setIndicator', payload => dis
   });
 });
 
-export const saveData = createThunkAction('APP/saveData', ({type, data}) => dispatch => {
-  switch(type) {
-    case 'csv':
-      exportService.saveAsCSV(data);
-      break;
-    case 'json':
-    default:
-      exportService.saveAsJSON(data);
-  }
+export const saveData = createThunkAction('APP/saveData', () => () => {
+  exportService.saveRankings();
 });
 
