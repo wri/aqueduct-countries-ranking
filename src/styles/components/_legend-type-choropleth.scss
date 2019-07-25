@@ -1,0 +1,88 @@
+.c-legend-type-choropleth {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  > li {
+    padding: 0;
+    margin: 10px 0 0;
+    flex: 1 1 auto;
+  }
+
+  .name {
+    display: block;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 12px;
+    text-align: center;
+  }
+
+  .icon-choropleth {
+    display: block;
+    height: 5px;
+    margin-bottom: 5px;
+  }
+
+  // @media screen and (max-width: map-get($breakpoints, small)) {
+  //   flex-direction: column;
+  //   margin-top: 10px;
+
+  //   > li {
+  //     margin: 0;
+  //     line-height: 21px;
+  //   }
+
+  //   .name {
+  //     display: inline-block;
+  //     margin-left: 5px;
+  //   }
+
+  //   .icon-choropleth {
+  //     position: relative;
+  //     top: 1px;
+  //     display: inline-block;
+  //     height: 12px;
+  //     width: 12px;
+  //     margin-bottom: 0;
+  //   }
+  // }
+}
+
+.graph-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 5px 0 0 6px;
+  padding: 0 0 5px 15px;
+  border-left: 1px solid rgba(palette(gray, 'dark'), .2);
+
+  .graph-list-item {
+    display: flex;
+    width: calc(50% - #{$space-1});
+    margin: 5px 0 0 0;
+
+    // @include only-desktop {
+    //   width: calc(25% - #{$space-1});
+    // }
+
+    // @include only-print {
+    //   width: calc(25% - #{$space-1});
+    // }
+
+    .color {
+      display: block;
+      width: 12px;
+      height: 12px;
+      // border: 1px solid $border-color-2;
+    }
+
+    .label {
+      display: block;
+      line-height: 1;
+      // color: $color-text-1;
+      // font-size: $font-size-small;
+      font-weight: 500;
+      margin: 0 0 0 5px;
+    }
+  }
+}
