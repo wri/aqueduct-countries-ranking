@@ -7,9 +7,9 @@ import * as serviceWorker from 'config/serviceWorker';
 import store from 'config/store';
 import Pages from 'components/layout';
 
-import 'styles/index.scss';
-
+import 'react-app-polyfill/stable';
 import 'aqueduct-components/dist/bundle';
+import 'styles/index.scss';
 
 const App = () => (
   <Provider store={store}>
