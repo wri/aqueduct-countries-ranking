@@ -10,22 +10,23 @@
     .widgets--row-number {
       display: table-cell;
       padding: 20px;
-      max-width: 61px;
+      width: 61px;
     }
   
     .widgets--name {
       display: table-cell;
-      width: 271px;
+      flex-grow: 1;
     }
   
     .widgets--chart {
       display: table-cell;
+      width: 160px;
     }
   
     .widgets--total {
       display: table-cell;
       padding-right: 46px;
-      min-width: 86px;
+      width: 160px;
       text-align: center;
     }  
   }
@@ -82,7 +83,8 @@
   }
 
   .widgets--content-row {
-    display: flex;
+    display: table;
+    justify-content: space-between;
     position: relative;
     color: palette(gray, dark);
     font-size: $font-size-huge;
