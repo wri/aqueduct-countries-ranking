@@ -26,6 +26,7 @@ const HeaderCountry = ({ onBackClick, data }) => {
           </ul>
         </div>
         <IndicatorSelector className="header--indicator-selector"/>
+        <p className="header--disclaimer">This map is for illustrative purposes and does not imply the expression of any opinion on the part of WRI concerning the legal status of any country or territory, or concerning the delimitation of frontiers or boundaries.</p>
       </div>
     </header>
   );
