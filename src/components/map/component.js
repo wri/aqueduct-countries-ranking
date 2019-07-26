@@ -100,6 +100,7 @@ class Map extends Component {
                     interactivity: (layer.provider === 'carto' || layer.provider === 'cartodb') ? layer.interactionConfig.output.map(o => o.column) : true,
                     events: {
                       click: (e) => {
+                        console.log(e)
                         this.setState({
                           interactionData: e.data,
                           latlng: e.latlng
@@ -126,7 +127,14 @@ class Map extends Component {
               {
                 (this.state.interactionData) ?
                   <div>
-                    <h3>{this.state.interactionData.name_0}</h3>
+                    {this.state.interactionData.name_1 ? (
+                      <div>
+                        <h3>{this.state.interactionData.name_1}</h3>
+                        <h4>{this.state.interactionData.name_0}</h4>
+                      </div>
+                    ): (
+                      <h3>{this.state.interactionData.name_0}</h3>
+                    )}
                     <div>{this.state.interactionData.label}</div>
                   </div>
                   : <div>No data</div>
