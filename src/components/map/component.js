@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import LegendTypeChoropleth from '../legend-type-choropleth';
-
 import {
   Map as LeMap,
   MapControls,
@@ -12,11 +11,11 @@ import {
   LegendItemTypes,
   MapPopup
 } from 'vizzuality-components';
-
+import BasemapControl from './basemap-control';
 import { PluginLeaflet } from 'layer-manager';
 import { LayerManager, Layer } from 'layer-manager/dist/components';
 
-import { BASEMAP_CONFIG } from './constants';
+import { BASEMAPS } from './constants';
 
 class Map extends Component {
   static propTypes = {
@@ -54,7 +53,11 @@ class Map extends Component {
   }
 
   render() {
-    const { className = '', viewport, layers, bounds } = this.props;
+    const { className = '', viewport, layers, bounds, basemap } = this.props;
+    const basemapConfig = {
+      ...BASEMAPS[basemap || 'osm'],
+      url: BASEMAPS[basemap || 'osm'].value
+    };
     const mapProps = {
       customClass: className,
       mapOptions: {
@@ -65,13 +68,13 @@ class Map extends Component {
         }
       },
       bounds,
-      basemap: BASEMAP_CONFIG,
+      basemap: basemapConfig,
       events: {
         zoomend: (e, map) => { /*console.info(e, map);*/ },
         dragend: (e, map) => { /*console.info(e, map);*/ }
       }
     };
-    
+
     const layerGroups = (layers && layers.length) ? layers.map(l => ({
       name: l.name,
       dataset: l.dataset,
@@ -101,7 +104,7 @@ class Map extends Component {
                     events: {
                       click: (e) => {
                         this.setState({
-                          interactions: { ...this.state.interactions, [layer.id]: e },
+                          interactionData: e.data,
                           latlng: e.latlng
                         })
                       }
@@ -112,6 +115,7 @@ class Map extends Component {
             </LayerManager>
             <MapControls>
               <ZoomControl map={_map} />
+              <BasemapControl />
               <Icon className="-medium" name="icon-share" />
               {/* <Icon className="-medium" name="icon-download" /> */}
             </MapControls>
@@ -124,14 +128,20 @@ class Map extends Component {
               }}
             >
               {
-                (this.state.interactions) &&
-                  Object.keys(this.state.interactions).map(k => (
-                    <div key={this.state.interactions[k].data.name_0}>
-                      <h3>{this.state.interactions[k].data.name_0}</h3>
-                      <div>{this.state.interactions[k].data.label}</div>
-                    </div>
-                  ))
-              }  
+                (this.state.interactionData) ?
+                  <div>
+                    {this.state.interactionData.name_1 ? (
+                      <div>
+                        <h3>{this.state.interactionData.name_1}</h3>
+                        <h4>{this.state.interactionData.name_0}</h4>
+                      </div>
+                    ): (
+                      <h3>{this.state.interactionData.name_0}</h3>
+                    )}
+                    <div>{this.state.interactionData.label}</div>
+                  </div>
+                  : <div>No data</div>
+              }
             </MapPopup>
             <div className="c-legend">
               <Legend sortable={false}>
