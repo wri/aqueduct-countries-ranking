@@ -14,7 +14,7 @@ function IndicatorSelector({
   return (
     <Field
       name="indication-filter"
-      label="Water Risk Indicator"
+      label="Select Water Risk Indicator"
       className="-bigger"
     >
       <CustomSelect

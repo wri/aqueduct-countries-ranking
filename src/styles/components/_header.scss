@@ -26,6 +26,9 @@ $text-color: #AFC7FF;
     color: palette(white);
   }
 
+  .header--info {
+    margin-bottom: 16px;
+  }
   .header--indicators {
     display: flex;
     flex-flow: row;
@@ -34,6 +37,10 @@ $text-color: #AFC7FF;
     li {
       display: inline-block;
     }
+  }
+
+  .header--disclaimer {
+    margin-top: 16px;
   }
 
   .-uppercase {

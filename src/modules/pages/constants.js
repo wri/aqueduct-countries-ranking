@@ -3,7 +3,7 @@ import { NOT_FOUND } from 'redux-first-router';
 export const PAGES = [
   {
     name: 'HOME',
-    path: '/',
+    path: '/:iso?/:indicator?',
     page: 'home'
   },
   {
