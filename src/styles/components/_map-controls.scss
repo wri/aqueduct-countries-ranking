@@ -1,5 +1,7 @@
 $button-size: 36px;
 
+
+
 .c-map-controls {
   position: absolute;
   top: $space-1 * 2;
@@ -13,7 +15,9 @@ $button-size: 36px;
   }
 }
 
-.map-controls-item {
+.map-controls-item,
+.wri_api__c-zoom-control,
+.wri_api__map-controls-list-item {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -38,6 +42,7 @@ $button-size: 36px;
     width: $button-size;
     height: $button-size;
     background-color: palette(white);
+    border-radius: 0;
     transition: background-color linear $animation-time;
 
     &:not(:first-child) {
@@ -60,5 +65,5 @@ $button-size: 36px;
 }
 
 .aq__c-icon.aq__-light {
-  fill: black;
+  fill: palette(gray, 'dark');
 }
