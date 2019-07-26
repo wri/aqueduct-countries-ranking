@@ -34,12 +34,10 @@ const DashboardWidgets = ({title, buttonText, data, onSelect}) => {
   const sortedData = data.sort((a, b) => {
     const {Tot:aTot, Pop:aPop} = a.indicators;
     const {Tot:bTot, Pop:bPop} = b.indicators;
-    if (aTot && bTot) {
-      return parseInt(aTot) - parseInt(bTot);
-    }
-
-    if (aPop && bPop) {
-      return parseInt(aPop) - parseInt(bPop);
+    if (aTot && bTot && aTot.score && bTot.score) {
+      return parseFloat(bTot.score) - parseFloat(aTot.score);
+    } else if (aPop && bPop && aPop.score && bPop.score) {
+      return parseFloat(bPop.score) - parseFloat(aPop.score);
     }
 
     return 0;
