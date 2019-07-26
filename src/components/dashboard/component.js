@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import HeaderGeneral from 'components/header-general';
 import HeaderCountry from 'components/header-country';
@@ -12,14 +12,10 @@ const Dashboard = ({
   headerData,
   widgetsData,
   setCountry,
-  saveData,
-  loadDashboardData
+  saveData
 }) => {
-  useEffect(() => {
-     loadDashboardData()
-  }, [loadDashboardData]);
-
   const backClickHandler = () => setCountry({data: null});
+  const rankingTitle = (scope === SCOPE.GENERAL) ? 'Country Rankings' : 'Sub-national Rankings';
 
   return (
     <div className="dashboard">
@@ -27,7 +23,7 @@ const Dashboard = ({
         <HeaderGeneral /> :
         <HeaderCountry data={headerData} onBackClick={backClickHandler} />
       }
-      <DashboardWidgets data={widgetsData} onSelect={saveData} />
+      <DashboardWidgets data={widgetsData} onSelect={saveData} title={rankingTitle} />
       <Footer scope={scope} />
     </div>
   );

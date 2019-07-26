@@ -1,4 +1,5 @@
 import { connectRoutes } from 'redux-first-router';
+import queryString from 'query-string';
 
 import { PAGES } from 'modules/pages/constants';
 
@@ -14,7 +15,8 @@ const options = {
   basename: process.env.REACT_APP_BASE_URL,
   location: 'router',
   notFoundPath: `${process.env.REACT_APP_BASE_URL}404`,
-  initialDispatch: false
+  initialDispatch: false,
+  querySerializer: queryString
 };
 
 export default connectRoutes(routes, options);

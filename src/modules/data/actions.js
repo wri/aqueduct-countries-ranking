@@ -5,6 +5,8 @@ import processLocation from 'utils/process-location';
 
 import { INDICATORS } from 'services/wri-service/constants';
 
+import { setCountry } from 'modules/app/actions';
+
 import {
   setCountries,
   // setCountryValue,
@@ -24,15 +26,27 @@ export const setCountriesData = createAction('DATA/setCountriesData');
  *    If the indicator changes chances are countries list will change.
  */
 
- export const loadDashboardData = createThunkAction('DATA/loadDashboardData', () => dispatch => {
+ export const loadDashboardData = createThunkAction('DATA/loadDashboardData', () => (dispatch, state) => {
+  const { router } = state();
+  const { country, indicator } = router.query || {};
+
   dispatch(getIndicators());
+
+  if (indicator) {
+    dispatch(setIndicatorValue({data: indicator}));
+  }
+
   dispatch(getCountriesData()).then(data => {
     const countries4widget = Object.entries(data)
       .filter(entry => entry[0] !== '_stats')
       .map(entry => processLocation(entry[0], entry[1]));
 
-    dispatch(setWidgetStats({data: data._stats}));
-    dispatch(setWidgetData({data: countries4widget}));
+    if (country) {
+      dispatch(setCountry({data: country.toUpperCase()}));
+    } else {
+      dispatch(setWidgetStats({data: data._stats}));
+      dispatch(setWidgetData({data: countries4widget}));
+    }
   });
 });
 

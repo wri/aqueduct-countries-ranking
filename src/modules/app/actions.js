@@ -10,6 +10,7 @@ import {
   setWidgetData,
   setWidgetStats
 } from 'modules/dashboard/actions';
+import { SCOPE } from 'modules/dashboard/constants';
 
 import { getCountriesData, getProvincesData } from 'modules/data/actions';
 import { setMapBounds } from 'modules/map/actions';
@@ -19,16 +20,17 @@ export const setDashboardCollapsed = createAction('APP/setDashboardCollapsed');
 export const setCountry = createThunkAction('APP/setCountry', payload => dispatch => {
   dispatch(setLocation(payload));
   dispatch(setCountryValue(payload));
+  dispatch(setUrl({params: {country: payload.data}}));
 
   const getData = (payload.data) ? getProvincesData : getCountriesData;
 
   dispatch(getData()).then(data => {
-    const countries4widget = Object.entries(data)
+    const widgetData = Object.entries(data)
       .filter(entry => entry[0] !== '_stats')
       .map(entry => processLocation(entry[0], entry[1]));
 
     dispatch(setWidgetStats({data: data._stats}));
-    dispatch(setWidgetData({data: countries4widget}));
+    dispatch(setWidgetData({data: widgetData}));
   });
 
   if (!payload.data) {
@@ -36,26 +38,39 @@ export const setCountry = createThunkAction('APP/setCountry', payload => dispatc
   }
 });
 
-export const setIndicator = createThunkAction('APP/setIndicator', payload => dispatch => {
+export const setIndicator = createThunkAction('APP/setIndicator', payload => (dispatch, state) => {
   dispatch(setIndicatorValue(payload));
-  dispatch(getCountriesData()).then(data => {
-    const provinces4widget = Object.entries(data)
+  dispatch(setUrl({params: {indicator: payload.data}}));
+
+  const {dashboard: {scope}} = state();
+  const getData = (scope === SCOPE.COUNTRY ) ? getProvincesData : getCountriesData;
+
+  dispatch(getData()).then(data => {
+    const widgetData = Object.entries(data)
       .filter(entry => entry[0] !== '_stats')
       .map(entry => processLocation(entry[0], entry[1]));
 
     dispatch(setWidgetStats({data: data._stats}));
-    dispatch(setWidgetData({data: provinces4widget}));
+    dispatch(setWidgetData({data: widgetData}));
   });
 });
 
-export const saveData = createThunkAction('APP/saveData', ({type, data}) => dispatch => {
-  switch(type) {
-    case 'csv':
-      exportService.saveAsCSV(data);
-      break;
-    case 'json':
-    default:
-      exportService.saveAsJSON(data);
-  }
+export const setUrl = createThunkAction('APP/saveData', ({ params, replace }) => (dispatch, state) => {
+  const { router: {type, query} } = state();
+
+  const newQuery = replace
+    ? {...params}
+    : {...query, ...params};
+
+  const cleanQuery = Object.fromEntries(Object.entries(newQuery).filter(entry => Boolean(entry[1])));
+
+  dispatch({
+    type,
+    query: cleanQuery
+  });
+});
+
+export const saveData = createThunkAction('APP/saveData', () => () => {
+  exportService.saveRankings();
 });
 

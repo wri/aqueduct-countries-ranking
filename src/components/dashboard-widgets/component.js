@@ -1,22 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import DropdownButton from 'components/dropdown-button';
 import Widget from 'components/widget';
 import Bar from 'components/bar';
-
-const downloadOptions = [
-  { label: 'Download CSV', value: 'csv' },
-  { label: 'Download JSON', value: 'json' }
-];
+import {
+  palette,
+  chartOrder,
+  tableClasses
+} from './constants';
 
 const DashboardWidgets = ({title, buttonText, data, onSelect}) => {
   if (data.length === 0) {
     return null;
   }
-
-  const palette = ['#3FA989', '#00A0E1', '#4A596A'];
-  const chartOrder = ['Irr', 'Dom', 'Ind', 'Pop'];
 
   const headerIndicators = Object.entries(data[0].indicators)
     .filter(data => chartOrder.includes(data[0]))
@@ -35,32 +31,36 @@ const DashboardWidgets = ({title, buttonText, data, onSelect}) => {
     length: value => (value / 5) * 76
   };
 
-  const selectHandler = ({value}) => {
-    onSelect({type: value, data});
-  };
+  const sortedData = data.sort((a, b) => {
+    const {Tot:aTot, Pop:aPop} = a.indicators;
+    const {Tot:bTot, Pop:bPop} = b.indicators;
+    if (aTot && bTot && aTot.score && bTot.score) {
+      return parseFloat(bTot.score) - parseFloat(aTot.score);
+    } else if (aPop && bPop && aPop.score && bPop.score) {
+      return parseFloat(bPop.score) - parseFloat(aPop.score);
+    }
+
+    return 0;
+  });
 
   return (
     <div className="c-widgets">
       <div className="widgets--header">
         <span className="-uppercase">{title}</span>
-        <DropdownButton
-          dropdownClassName="-bottom -left"
-          options={downloadOptions}
-          onSelect={selectHandler}
-        >
-          <button type="button">{buttonText}</button>
-        </DropdownButton>
+        <button type="button" onClick={onSelect}>{buttonText}</button>
       </div>
       <div className="widgets--content-wrapper">
         <div className="widgets--content-header">
-          <div>{indicatorsLegend}</div>
-          <div>Total</div>
+          <div className={tableClasses.columns[0]}>Rank</div>
+          <div className={tableClasses.columns[1]}>Name</div>
+          <div className={tableClasses.columns[2]}>Sectoral Score{indicatorsLegend}</div>
+          <div className={tableClasses.columns[3]}>Total Score</div>
         </div>
         <div className="widgets--content-body">
-        {data.map((country, index) => {
+        {sortedData.map((country, index) => {
           return (
               <Widget
-                className="widgets--content-row"
+                classes={tableClasses}
                 key={country.iso}
                 rowNumber={index + 1}
                 country={country}
