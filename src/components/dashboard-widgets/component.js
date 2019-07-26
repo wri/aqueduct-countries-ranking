@@ -3,14 +3,16 @@ import PropTypes from 'prop-types';
 
 import Widget from 'components/widget';
 import Bar from 'components/bar';
+import {
+  palette,
+  chartOrder,
+  tableClasses
+} from './constants';
 
 const DashboardWidgets = ({title, buttonText, data, onSelect}) => {
   if (data.length === 0) {
     return null;
   }
-
-  const palette = ['#3FA989', '#00A0E1', '#4A596A'];
-  const chartOrder = ['Irr', 'Dom', 'Ind', 'Pop'];
 
   const headerIndicators = Object.entries(data[0].indicators)
     .filter(data => chartOrder.includes(data[0]))
@@ -29,15 +31,19 @@ const DashboardWidgets = ({title, buttonText, data, onSelect}) => {
     length: value => (value / 5) * 76
   };
 
-  const tableClasses = {
-    row: 'widgets--content-row',
-    columns: [
-      'widgets--row-number',
-      'widgets--name',
-      'widgets--chart',
-      'widgets--total'
-    ]
-  };
+  const sortedData = data.sort((a, b) => {
+    const {Tot:aTot, Pop:aPop} = a.indicators;
+    const {Tot:bTot, Pop:bPop} = b.indicators;
+    if (aTot && bTot) {
+      return parseInt(aTot) - parseInt(bTot);
+    }
+
+    if (aPop && bPop) {
+      return parseInt(aPop) - parseInt(bPop);
+    }
+
+    return 0;
+  });
 
   return (
     <div className="c-widgets">
@@ -53,7 +59,7 @@ const DashboardWidgets = ({title, buttonText, data, onSelect}) => {
           <div className={tableClasses.columns[3]}>Total Score</div>
         </div>
         <div className="widgets--content-body">
-        {data.map((country, index) => {
+        {sortedData.map((country, index) => {
           return (
               <Widget
                 classes={tableClasses}
