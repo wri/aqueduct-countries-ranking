@@ -13,5 +13,6 @@ export default {
   [actions.setCountryValue]: (state, { payload: { data } }) => ({ ...state, countries: {...state.countries, value: data} }),
   [actions.setIndicatorValue]: (state, { payload: { data } }) => ({ ...state, indicators: {...state.indicators, value: data} }),
   [actions.setWidgetData]: (state, { payload: { data } }) => ({ ...state, widget: {...state.widget, data} }),
-  [actions.setWidgetStats]: (state, { payload: { data: stats } }) => ({ ...state, widget: {...state.widget, stats} })
+  [actions.setWidgetStats]: (state, { payload: { data: stats } }) => ({ ...state, widget: {...state.widget, stats} }),
+  [actions.setWidth]: (state, { payload: { data } }) => ({ ...state, width: data })
 };

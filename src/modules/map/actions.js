@@ -12,7 +12,8 @@ export const setMapLoaded = createAction('MAP/setMapLoaded');
 export const setMapFlying = createAction('MAP/setMapFlying');
 
 export const getCountryBounds = createThunkAction('MAP/getCountryBounds', () => (dispatch, getState) => {
-  const iso = getState().dashboard.locationId;
+  const state = getState();
+  const { locationId: iso, width: offset } = state.dashboard;
   const boundsSQL = `SELECT ST_AsGeoJSON(ST_AsText(ST_Envelope(the_geom))) as geometry, gid_0, name_0 FROM gadm_wri_0 WHERE gid_0 = '${iso}'`;
 
   axios.get(`https://wri-rw.carto.com/api/v2/sql?q=${boundsSQL}`)
@@ -20,7 +21,9 @@ export const getCountryBounds = createThunkAction('MAP/getCountryBounds', () => 
       const theGeom = JSON.parse(result.data.rows[0].geometry);
       const bounds = window.L.geoJSON(theGeom).getBounds();
       const bbox = bounds.toBBoxString().split(',').map(b => parseFloat(b));
-      dispatch(setMapBounds({ bbox }))
+      dispatch(setMapBounds({ bbox, options: {
+        paddingTopLeft: [offset, 0]
+      } }));
     });
 });
 
