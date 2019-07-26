@@ -53,8 +53,8 @@
   flex-wrap: wrap;
   align-items: center;
   margin: 5px 0 0 6px;
-  padding: 0 0 5px 15px;
-  border-left: 1px solid rgba(palette(gray, 'dark'), .2);
+  padding: 0 0 5px 0;
+  // border-left: 1px solid rgba(palette(gray, 'dark'), .2);
 
   .graph-list-item {
     display: flex;

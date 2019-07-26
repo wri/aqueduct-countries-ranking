@@ -6,7 +6,8 @@ import { getActiveLayers } from 'modules/layers/selectors';
 
 const mapStateToProps = state => ({
   ...state.map,
-  layers: getActiveLayers(state)
+  layers: getActiveLayers(state),
+  scope: state.dashboard.scope
 });
 
 const mapDispatchToProps = {

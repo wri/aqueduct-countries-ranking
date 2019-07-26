@@ -9,13 +9,15 @@ import {
   Legend,
   LegendListItem,
   LegendItemTypes,
-  MapPopup
+  MapPopup,
+  LegendItemToolbar,
+  LegendItemButtonOpacity
 } from 'vizzuality-components';
 import BasemapControl from './basemap-control';
 import { PluginLeaflet } from 'layer-manager';
 import { LayerManager, Layer } from 'layer-manager/dist/components';
 
-import { BASEMAPS } from './constants';
+import { BASEMAPS, LABEL_LAYER_CONFIG } from './constants';
 
 class Map extends Component {
   static propTypes = {
@@ -53,7 +55,7 @@ class Map extends Component {
   }
 
   render() {
-    const { className = '', viewport, layers, bounds, basemap } = this.props;
+    const { className = '', viewport, layers, bounds, basemap, scope } = this.props;
     const basemapConfig = {
       ...BASEMAPS[basemap || 'osm'],
       url: BASEMAPS[basemap || 'osm'].value
@@ -80,6 +82,8 @@ class Map extends Component {
       dataset: l.dataset,
       layers: [{...l, active: true}]
     })) : [];
+
+    if (scope === 'COUNTRY') mapProps.bounds = LABEL_LAYER_CONFIG;
 
     // NOTE: We need to prefix icon name with 'icon-' because Icon from vizzuality
     // does not do that automatically but Icon from aqueduct does.
@@ -150,6 +154,17 @@ class Map extends Component {
                     index={i}
                     key={lg.dataset}
                     layerGroup={lg}
+                    onChangeOpacity={(_layer, _opacity) => {
+                      console.log(_opacity);
+                    }}
+                    // toolbar={(
+                    //   <LegendItemToolbar>
+                    //     <LegendItemButtonOpacity
+                    //       trackStyle={{ backgroundColor: '#2E57B8' }}
+                    //       handleStyle={{ backgroundColor: '#2E57B8' }}
+                    //     />
+                    //   </LegendItemToolbar>
+                    // )}
                   >
                     <LegendItemTypes>
                       <LegendTypeChoropleth />

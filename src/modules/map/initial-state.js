@@ -4,5 +4,5 @@ export default {
     latitude: 41.145218001222204,
     longitude: -8.61132408966133,
   },
-  basemap: 'osm'
+  basemap: 'hydro'
 };

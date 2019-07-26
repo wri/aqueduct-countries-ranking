@@ -65,7 +65,7 @@ class BasemapControl extends PureComponent {
       >
         {/* First child: This is what the item will be tethered to */}
         <button type="button" className="basemap-button" onClick={() => this.toggleDropdown(true)}>
-          <Icon name="icon-layers" className="-small" />
+          <Icon name="layers" className="-small" />
         </button>
 
         {/* Second child: If present, this item will be tethered to the the first child */}

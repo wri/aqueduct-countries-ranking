@@ -18,14 +18,17 @@ class LegendTypeChoropleth extends React.PureComponent {
       return null;
     }
 
-    return (      
+    return (
       <div>
         <ul className="c-legend-type-choropleth">
           {legendConfig.items.map(({ name, value, color }) => (
             <li key={`legend-choropleth-item-${name || value}`}>
               <div className="icon-choropleth" style={{ backgroundColor: color }} />
               <span className="name">
-                {name || value}
+                {name}
+              </span>
+              <span className="name">
+                {value}
               </span>
             </li>
           ))}
