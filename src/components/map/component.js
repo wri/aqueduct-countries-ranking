@@ -83,7 +83,7 @@ class Map extends Component {
       layers: [{...l, active: true}]
     })) : [];
 
-    if (scope === 'COUNTRY') mapProps.bounds = LABEL_LAYER_CONFIG;
+    if (scope !== 'COUNTRY') mapProps.label = LABEL_LAYER_CONFIG;
 
     // NOTE: We need to prefix icon name with 'icon-' because Icon from vizzuality
     // does not do that automatically but Icon from aqueduct does.
