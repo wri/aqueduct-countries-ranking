@@ -71,7 +71,7 @@ class Map extends Component {
         dragend: (e, map) => { /*console.info(e, map);*/ }
       }
     };
-    
+
     const layerGroups = (layers && layers.length) ? layers.map(l => ({
       name: l.name,
       dataset: l.dataset,
@@ -101,7 +101,7 @@ class Map extends Component {
                     events: {
                       click: (e) => {
                         this.setState({
-                          interactions: { ...this.state.interactions, [layer.id]: e },
+                          interactionData: e.data,
                           latlng: e.latlng
                         })
                       }
@@ -124,14 +124,13 @@ class Map extends Component {
               }}
             >
               {
-                (this.state.interactions) &&
-                  Object.keys(this.state.interactions).map(k => (
-                    <div key={this.state.interactions[k].data.name_0}>
-                      <h3>{this.state.interactions[k].data.name_0}</h3>
-                      <div>{this.state.interactions[k].data.label}</div>
-                    </div>
-                  ))
-              }  
+                (this.state.interactionData) ?
+                  <div>
+                    <h3>{this.state.interactionData.name_0}</h3>
+                    <div>{this.state.interactionData.label}</div>
+                  </div>
+                  : <div>No data</div>
+              }
             </MapPopup>
             <div className="c-legend">
               <Legend sortable={false}>
