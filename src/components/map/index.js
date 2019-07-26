@@ -1,7 +1,10 @@
 import { connect } from 'react-redux';
-import { setMapViewport, setMapBounds, setMapLoaded, setMapFlying } from 'modules/map/actions';
+import {
+  setMapViewport, setMapBounds, setMapLoaded, setMapFlying
+} from 'modules/map/actions';
 
 import Map from './component';
+import { setLayersOpacity } from 'modules/layers/actions';
 import { getActiveLayers } from 'modules/layers/selectors';
 
 const mapStateToProps = state => ({
@@ -14,7 +17,8 @@ const mapDispatchToProps = {
   setMapViewport,
   setMapBounds,
   setMapLoaded,
-  setMapFlying
+  setMapFlying,
+  setLayersOpacity
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Map);

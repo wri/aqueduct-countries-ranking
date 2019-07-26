@@ -15,14 +15,21 @@ export const getActiveLayers = createSelector(
     }
 
     const indicatorIndex = indexes[_currentIndicator];
-    
+
     // Country view: show provinces in this case
     if (_currentScope === 'COUNTRY') {
       const layerSpec = _layers.province_rankings[indicatorIndex];
-      return [{ ...layerSpec, params: { ...layerSpec.params, iso: _currentCountry } }];
+      return [{
+        ...layerSpec,
+        opacity: layerSpec.opacity || 0.5,
+        params: { ...layerSpec.params, iso: _currentCountry }
+      }];
     }
 
     // Global view: show country layer
-    return [_layers.country_rankings[indicatorIndex]];
+    return [{
+      ..._layers.country_rankings[indicatorIndex],
+      opacity: _layers.country_rankings[indicatorIndex].opacity || 0.5
+    }];
   }
 );

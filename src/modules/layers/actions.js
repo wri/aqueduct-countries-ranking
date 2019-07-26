@@ -4,6 +4,7 @@ import WRIService from 'services/wri-service';
 export const setList = createAction('LAYERS/setList');
 export const setLoading = createAction('LAYERS/setLoading');
 export const setError = createAction('LAYERS/setError');
+export const setLayersOpacity = createAction('LAYERS/setLayersOpacity');
 export const getLayers = createThunkAction('LAYERS/getLayers', () => dispatch => {
   dispatch(setLoading(true));
   dispatch(setError(null));
@@ -28,5 +29,6 @@ export default {
   setList,
   setLoading,
   setError,
-  getLayers
+  getLayers,
+  setLayersOpacity
 };

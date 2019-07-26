@@ -55,7 +55,7 @@ class Map extends Component {
   }
 
   render() {
-    const { className = '', viewport, layers, bounds, basemap, scope } = this.props;
+    const { className = '', viewport, layers, bounds, basemap, scope, setLayersOpacity } = this.props;
     const basemapConfig = {
       ...BASEMAPS[basemap || 'osm'],
       url: BASEMAPS[basemap || 'osm'].value
@@ -154,17 +154,15 @@ class Map extends Component {
                     index={i}
                     key={lg.dataset}
                     layerGroup={lg}
-                    onChangeOpacity={(_layer, _opacity) => {
-                      console.log(_opacity);
-                    }}
-                    // toolbar={(
-                    //   <LegendItemToolbar>
-                    //     <LegendItemButtonOpacity
-                    //       trackStyle={{ backgroundColor: '#2E57B8' }}
-                    //       handleStyle={{ backgroundColor: '#2E57B8' }}
-                    //     />
-                    //   </LegendItemToolbar>
-                    // )}
+                    onChangeOpacity={(_layer, _opacity) => setLayersOpacity(_opacity)}
+                    toolbar={(
+                      <LegendItemToolbar>
+                        <LegendItemButtonOpacity
+                          trackStyle={{ backgroundColor: '#2E57B8' }}
+                          handleStyle={{ backgroundColor: '#2E57B8' }}
+                        />
+                      </LegendItemToolbar>
+                    )}
                   >
                     <LegendItemTypes>
                       <LegendTypeChoropleth />

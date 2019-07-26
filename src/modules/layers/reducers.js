@@ -1,10 +1,9 @@
-import * as actions from './actions';
-
-const {
+import {
   setList,
   setLoading,
   setError,
-} = actions;
+  setLayersOpacity
+} from './actions';
 
 export default {
   [setList]: (state, { payload }) => ({
@@ -15,5 +14,12 @@ export default {
   }),
   [setError]: (state, { payload }) => ({
     ...state, error: payload
+  }),
+  [setLayersOpacity]: (state, { payload }) => ({
+    ...state,
+    list: {
+      country_rankings: state.list.country_rankings.map(l => ({ ...l, opacity: payload })),
+      province_rankings: state.list.province_rankings.map(l => ({ ...l, opacity: payload }))
+    }
   })
 };
