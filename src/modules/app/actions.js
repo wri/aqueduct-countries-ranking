@@ -20,6 +20,7 @@ export const setDashboardCollapsed = createAction('APP/setDashboardCollapsed');
 export const setCountry = createThunkAction('APP/setCountry', payload => dispatch => {
   dispatch(setLocation(payload));
   dispatch(setCountryValue(payload));
+  dispatch(setUrl({params: {country: payload.data}}));
 
   const getData = (payload.data) ? getProvincesData : getCountriesData;
 
@@ -39,6 +40,7 @@ export const setCountry = createThunkAction('APP/setCountry', payload => dispatc
 
 export const setIndicator = createThunkAction('APP/setIndicator', payload => (dispatch, state) => {
   dispatch(setIndicatorValue(payload));
+  dispatch(setUrl({params: {indicator: payload.data}}));
 
   const {dashboard: {scope}} = state();
   const getData = (scope === SCOPE.COUNTRY ) ? getProvincesData : getCountriesData;
@@ -50,6 +52,21 @@ export const setIndicator = createThunkAction('APP/setIndicator', payload => (di
 
     dispatch(setWidgetStats({data: data._stats}));
     dispatch(setWidgetData({data: widgetData}));
+  });
+});
+
+export const setUrl = createThunkAction('APP/saveData', ({ params, replace }) => (dispatch, state) => {
+  const { router: {type, query} } = state();
+
+  const newQuery = replace
+    ? {...params}
+    : {...query, ...params};
+
+  const cleanQuery = Object.fromEntries(Object.entries(newQuery).filter(entry => Boolean(entry[1])));
+
+  dispatch({
+    type,
+    query: cleanQuery
   });
 });
 

@@ -12,10 +12,11 @@ const pageMap = new Map([
 
 
 // prompts or error logging should be handled here
-const Layout = ({ page: { current, payload } }) => {
+const Layout = props => {
+  const { page: { current } } = props;
   const Page = pageMap.has(current) ? pageMap.get(current) : NotFoundPage;
 
-  return <Page {...payload} />;
+  return <Page {...props} />;
 };
 
 Layout.propTypes = {
