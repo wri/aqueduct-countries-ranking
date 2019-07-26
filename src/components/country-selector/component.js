@@ -23,12 +23,10 @@ const IndicatorsContainer = () => (
 
 function CountrySelector({
   countries,
-  setCountry,
-  getCountryBounds
+  setCountry
 }) {
   const countryChangeHandler = (option) => {
     setCountry({data: option.value});
-    getCountryBounds(option.value);
   };
 
   return (

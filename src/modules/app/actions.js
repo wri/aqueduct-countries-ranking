@@ -12,6 +12,7 @@ import {
 } from 'modules/dashboard/actions';
 import { SCOPE } from 'modules/dashboard/constants';
 
+import { getCountryBounds } from 'modules/map/actions';
 import { getCountriesData, getProvincesData } from 'modules/data/actions';
 import { setMapBounds } from 'modules/map/actions';
 
@@ -22,6 +23,7 @@ export const setCountry = createThunkAction('APP/setCountry', payload => dispatc
   dispatch(setLocation(payload));
   dispatch(setCountryValue(payload));
   dispatch(setUrl({params: {country: payload.data}}));
+  dispatch(getCountryBounds(payload.data));
 
   const getData = (payload.data) ? getProvincesData : getCountriesData;
 
