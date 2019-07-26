@@ -1,3 +1,4 @@
 export default {
-  isDashboardCollapsed: false
+  isDashboardCollapsed: false,
+  isModalOpen: false
 };

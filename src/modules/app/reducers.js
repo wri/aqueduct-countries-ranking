@@ -1,6 +1,7 @@
 import {
   setCountry,
-  setDashboardCollapsed
+  setDashboardCollapsed,
+  setModalState
 } from './actions';
 
 const reducerMap = {
@@ -10,6 +11,9 @@ const reducerMap = {
   [setDashboardCollapsed]: (state, { payload }) => ({
     ...state, isDashboardCollapsed: Boolean(payload)
   }),
+  [setModalState]: (state, { payload }) => ({
+    ...state, isModalOpen: Boolean(payload)
+  })
 };
 
 export default reducerMap;

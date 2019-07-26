@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { setModalState } from 'modules/app/actions';
 import {
   setMapViewport, setMapBounds, setMapLoaded, setMapFlying
 } from 'modules/map/actions';
@@ -18,7 +19,8 @@ const mapDispatchToProps = {
   setMapBounds,
   setMapLoaded,
   setMapFlying,
-  setLayersOpacity
+  setLayersOpacity,
+  setModalState
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Map);

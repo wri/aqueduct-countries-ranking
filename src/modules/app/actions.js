@@ -16,6 +16,7 @@ import { getCountriesData, getProvincesData } from 'modules/data/actions';
 import { setMapBounds } from 'modules/map/actions';
 
 export const setDashboardCollapsed = createAction('APP/setDashboardCollapsed');
+export const setModalState = createAction('APP/setModalState');
 
 export const setCountry = createThunkAction('APP/setCountry', payload => dispatch => {
   dispatch(setLocation(payload));

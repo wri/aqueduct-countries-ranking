@@ -34,6 +34,7 @@ class Map extends Component {
     onLoad: PropTypes.func,
     onStyleLoad: PropTypes.func,
     layers: PropTypes.array,
+    setModalState: PropTypes.func
   }
 
   static defaultProps = {
@@ -55,7 +56,7 @@ class Map extends Component {
   }
 
   render() {
-    const { className = '', viewport, layers, bounds, basemap, scope, setLayersOpacity } = this.props;
+    const { className = '', viewport, layers, bounds, basemap, scope, setLayersOpacity, setModalState } = this.props;
     const basemapConfig = {
       ...BASEMAPS[basemap || 'osm'],
       url: BASEMAPS[basemap || 'osm'].value
@@ -84,6 +85,10 @@ class Map extends Component {
     })) : [];
 
     if (scope !== 'COUNTRY') mapProps.label = LABEL_LAYER_CONFIG;
+
+    const shareClickHandler = () => {
+      setModalState(true);
+    };
 
     // NOTE: We need to prefix icon name with 'icon-' because Icon from vizzuality
     // does not do that automatically but Icon from aqueduct does.
@@ -120,7 +125,7 @@ class Map extends Component {
             <MapControls>
               <ZoomControl map={_map} />
               <BasemapControl />
-              <Icon className="-medium" name="icon-share" />
+              <button type="button" onClick={shareClickHandler}><Icon className="-medium" name="icon-share" /></button>
               {/* <Icon className="-medium" name="icon-download" /> */}
             </MapControls>
             <MapPopup
