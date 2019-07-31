@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
   scope: state.dashboard.scope,
   width: state.dashboard.width,
   headerData: getCountryData(state),
-  widgetsData: state.dashboard.widget.data
+  widget: state.dashboard.widget
 });
 
 const mapDispatchToProps = {

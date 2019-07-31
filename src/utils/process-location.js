@@ -20,6 +20,17 @@ function setScore(score) {
 }
 
 function getIndicators(data) {
+  if (data.length === 1) {
+    const indicator = data[0];
+    return {
+      [indicator.category]: {
+        name: INDICATOR_CATEGORIES[indicator.category],
+        score: setScore(indicator.score),
+        rank: indicator.rank
+      }
+    };
+  }
+
   return data.reduce((acc, indicator) => ({
     ...acc,
     [indicator.category]: {

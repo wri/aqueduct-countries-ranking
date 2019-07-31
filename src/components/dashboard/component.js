@@ -12,7 +12,7 @@ const Dashboard = ({
   setWidth,
   scope,
   headerData,
-  widgetsData,
+  widget,
   setCountry,
   saveData
 }) => {
@@ -33,7 +33,7 @@ const Dashboard = ({
         <HeaderGeneral /> :
         <HeaderCountry data={headerData} onBackClick={backClickHandler} />
       }
-      <DashboardWidgets data={widgetsData} onSelect={saveData} title={rankingTitle} />
+      <DashboardWidgets data={widget} onSelect={saveData} title={rankingTitle} />
       <Footer scope={scope} />
     </div>
   );

@@ -9,8 +9,10 @@ import {
   tableClasses
 } from './constants';
 
-const DashboardWidgets = ({title, buttonText, data, onSelect}) => {
-  if (data.length === 0) {
+const DashboardWidgets = ({title, buttonText, data: widget, onSelect}) => {
+  const { data, stats} = widget;
+
+  if (!data.length || data.length === 0) {
     return null;
   }
 
@@ -25,10 +27,12 @@ const DashboardWidgets = ({title, buttonText, data, onSelect}) => {
     </div>
   ));
 
+  const minLength = 1;
+  const maxLength = 76;
   const chartConfig = {
     fields: chartOrder,
     palette,
-    length: value => (value / 5) * 76
+    length: value => minLength + ((value - stats.min) / stats.max) * (maxLength - minLength)
   };
 
   const sortedData = data.sort((a, b) => {
@@ -54,7 +58,7 @@ const DashboardWidgets = ({title, buttonText, data, onSelect}) => {
           <div className={tableClasses.columns[0]}>Rank</div>
           <div className={tableClasses.columns[1]}>Name</div>
           <div className={tableClasses.columns[2]}>Sectoral Score{indicatorsLegend}</div>
-          <div className={tableClasses.columns[3]}>Total Score</div>
+          {Object.values(sortedData[0].indicators).length > 1 ? <div className={tableClasses.columns[3]}>Total Score</div> : null}
         </div>
         <div className="widgets--content-body">
         {sortedData.map((country, index) => {
@@ -77,7 +81,13 @@ const DashboardWidgets = ({title, buttonText, data, onSelect}) => {
 DashboardWidgets.propTypes = {
   title: PropTypes.string,
   buttonText: PropTypes.string,
-  data: PropTypes.arrayOf(PropTypes.shape({})).isRequired
+  data: PropTypes.shape({
+    data: PropTypes.arrayOf(PropTypes.shape({})),
+    stats: PropTypes.shape({
+      min: PropTypes.number,
+      max: PropTypes.number
+    })
+  }).isRequired
 };
 
 DashboardWidgets.defaultProps = {

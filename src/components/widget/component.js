@@ -39,7 +39,9 @@ const Widget = ({classes, rowNumber, country, chartConfig}) => {
       <div className={classes.columns[2]}>
         <Chart indicators={country.indicators} config={chartConfig} />
       </div>
-      <div className={classes.columns[3]}>{country.indicators && country.indicators['Tot'] && country.indicators['Tot'].score}</div>
+      { Object.values(country.indicators).length > 1 
+        ? <div className={classes.columns[3]}>{country.indicators['Tot'] && country.indicators['Tot'].score}</div>
+        : null }
     </div>
   );
 };
