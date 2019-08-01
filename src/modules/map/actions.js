@@ -17,9 +17,13 @@ export const getCountryBounds = createThunkAction('MAP/getCountryBounds', () => 
   const boundsSQL = `SELECT ST_AsGeoJSON(ST_AsText(ST_Envelope(the_geom))) as geometry, gid_0, name_0 FROM gadm_wri_0 WHERE gid_0 = '${iso}'`;
 
   axios.get(`https://wri-rw.carto.com/api/v2/sql?q=${boundsSQL}`)
-    .then((result) => {
-      const theGeom = JSON.parse(result.data.rows[0].geometry);
-      const bounds = window.L.geoJSON(theGeom).getBounds();
+    .then(({data: {rows}}) => {
+      if (rows.length < 1) {
+        return dispatch(setMapBounds({bbox: [-180,90, 180, -90]}));
+      }
+
+      const geometry = JSON.parse(rows[0].geometry);
+      const bounds = window.L.geoJSON(geometry).getBounds();
       const bbox = bounds.toBBoxString().split(',').map(b => parseFloat(b));
       dispatch(setMapBounds({ bbox, options: {
         paddingTopLeft: [offset, 0]
