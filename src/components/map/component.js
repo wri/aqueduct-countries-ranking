@@ -138,15 +138,17 @@ class Map extends Component {
             >
               {
                 (this.state.interactionData) ?
-                  <div>
-                    {this.state.interactionData.name_1 ? (
-                      <div>
-                        <h3>{this.state.interactionData.name_1}</h3>
-                        <h4>{this.state.interactionData.name_0}</h4>
-                      </div>
-                    ): (
-                      <h3>{this.state.interactionData.name_0}</h3>
-                    )}
+                  <div className="c-map-popup">
+                    <div className="popup-header">
+                      {this.state.interactionData.name_1 ? (
+                        <>
+                          <h3>{this.state.interactionData.name_1}</h3>
+                          <h4>{this.state.interactionData.name_0}</h4>
+                        </>
+                      ): (
+                        <h3>{this.state.interactionData.name_0}</h3>
+                      )}
+                    </div>
                     <div>{this.state.interactionData.label}</div>
                   </div>
                   : <div>No data</div>
