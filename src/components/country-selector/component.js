@@ -3,6 +3,9 @@ import PropTypes from 'prop-types'
 import { Icon } from 'vizzuality-components';
 import { CustomSelect } from 'aqueduct-components';
 
+// utils
+import { logEvent } from 'utils/analytics';
+
 const countrySelectStyles = {
   container: styles => ({
     ...styles,
@@ -27,6 +30,7 @@ function CountrySelector({
 }) {
   const countryChangeHandler = (option) => {
     setCountry({data: option.value});
+    logEvent('[AQ-Country-Ranking] Countries', 'user selects a country', option.label);
   };
 
   return (

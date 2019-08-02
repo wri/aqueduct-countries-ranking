@@ -3,6 +3,9 @@ import { createAction, createThunkAction } from 'vizzuality-redux-tools';
 import exportService from 'services/export-service';
 import processLocation from 'utils/process-location';
 
+// utils
+import { logEvent } from 'utils/analytics';
+
 import {
   setCountryValue,
   setIndicatorValue,
@@ -75,5 +78,6 @@ export const setUrl = createThunkAction('APP/saveData', ({ params, replace }) =>
 
 export const saveData = createThunkAction('APP/saveData', () => () => {
   exportService.saveRankings();
+  logEvent('[AQ-Country-Ranking] Download', 'user downloads ranking', 'click');
 });
 

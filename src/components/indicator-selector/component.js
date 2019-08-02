@@ -4,12 +4,18 @@ import classnames from 'classnames';
 
 import { Field, CustomSelect } from 'aqueduct-components';
 
+// utils
+import { logEvent } from 'utils/analytics';
+
 function IndicatorSelector({
   indicators,
   setIndicator,
   className
 }) {
-  const indicatorChangeHandler = option => setIndicator({data: option.value});
+  const indicatorChangeHandler = (option) => {
+    setIndicator({data: option.value})
+    logEvent('[AQ-Country-Ranking] Indicators', 'user selects an indicator', option.label);
+  };
 
   return (
     <Field
