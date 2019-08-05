@@ -1,4 +1,5 @@
 export default {
   isDashboardCollapsed: false,
-  isModalOpen: false
+  isModalOpen: false,
+  modalContent: null
 };

@@ -11,8 +11,8 @@ const reducerMap = {
   [setDashboardCollapsed]: (state, { payload }) => ({
     ...state, isDashboardCollapsed: Boolean(payload)
   }),
-  [setModalState]: (state, { payload }) => ({
-    ...state, isModalOpen: Boolean(payload)
+  [setModalState]: (state, { payload: { isOpen, content } }) => ({
+    ...state, isModalOpen: Boolean(isOpen), modalContent: content
   })
 };
 

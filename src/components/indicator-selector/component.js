@@ -10,6 +10,7 @@ import { logEvent } from 'utils/analytics';
 function IndicatorSelector({
   indicators,
   setIndicator,
+  setModalState,
   className
 }) {
   const indicatorChangeHandler = (option) => {
@@ -17,17 +18,27 @@ function IndicatorSelector({
     logEvent('[AQ-Country-Ranking] Indicators', 'user selects an indicator', option.label);
   };
 
+  
+  const indicatorsInfoHandler = () => {
+    setModalState({ isOpen: true, content: 'indicators'});
+    // logEvent('[AQ-Country-Ranking] Share', 'user opens share modal', 'click');
+  };
+
+
   return (
     <Field
       name="indication-filter"
       label="Select Water Risk Indicator"
       className="-bigger"
+      customClass="c-indicator-selector"
+      theme="light"
+      onMoreInfo={indicatorsInfoHandler}
     >
       <CustomSelect
         theme="light"
         options={indicators.list}
         onChange={indicatorChangeHandler}
-        customClass={classnames('c-indicator-selector', { [className]: Boolean(className)})}
+        customClass={classnames('indicator-selector--select', { [className]: Boolean(className)})}
         value={indicators.value}
       />
     </Field>

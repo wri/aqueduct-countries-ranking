@@ -1,7 +1,14 @@
-.c-indicator-selector {
-  width: 292px;
+.c-indicator-selector{
 
-  .aq__react-select__control > .aq__react-select__value-container.aq__react-select__value-container--has-value + .aq__react-select__indicators::after {
-    display: block;
+  .aq__c-icon.aq__-light {
+    fill: palette(white);
+  }
+
+  .indicator-selector--select {
+    width: 292px;
+
+    .aq__react-select__control > .aq__react-select__value-container.aq__react-select__value-container--has-value + .aq__react-select__indicators::after {
+      display: block;
+    }
   }
 }

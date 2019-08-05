@@ -3,11 +3,23 @@ import { Sidebar } from 'aqueduct-components';
 
 import ModalManager from 'components/modal-manager';
 import ShareModal from 'components/share-modal';
+import IndicatorsInfoModal from 'components/indicators-info-modal';
 import Dashboard from 'components/dashboard';
 import Map from 'components/map';
 
-const Main = ({ isDashboardCollapsed, isModalOpen, setDashboardCollapsed, setModalState}) => {
-  const closeModalHandler = () => setModalState(false);
+function getModalContent(content) {
+  switch(content) {
+    case 'share':
+      return <ShareModal />;
+    case 'indicators':
+      return <IndicatorsInfoModal />;
+    default:
+      return <></>;
+  }
+}
+
+const Main = ({ isDashboardCollapsed, isModalOpen, modalContent, setDashboardCollapsed, setModalState}) => {
+  const closeModalHandler = () => setModalState({ isOpen: false, content: null });
   return (
     <main className="c-main">
       <Sidebar
@@ -23,7 +35,7 @@ const Main = ({ isDashboardCollapsed, isModalOpen, setDashboardCollapsed, setMod
         <Map className="c-aqueduct-map" />
       </div>
       <ModalManager isOpen={isModalOpen} appElement="#root" onRequestClose={closeModalHandler}>
-        <ShareModal />
+        {getModalContent(modalContent)}
       </ModalManager>
     </main>
   );

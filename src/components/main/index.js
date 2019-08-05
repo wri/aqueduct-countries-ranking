@@ -5,7 +5,6 @@ import {
 import { getLayers } from 'modules/layers/actions';
 import { setModalState } from 'modules/app/actions';
 
-
 import Main from './component';
 
 const mapStateToProps = state => ({

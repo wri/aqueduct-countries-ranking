@@ -90,7 +90,7 @@ class Map extends Component {
     if (scope !== 'COUNTRY') mapProps.label = LABEL_LAYER_CONFIG;
 
     const shareClickHandler = () => {
-      setModalState(true);
+      setModalState({isOpen: true, content: 'share' });
       logEvent('[AQ-Country-Ranking] Share', 'user opens share modal', 'click');
     };
 
