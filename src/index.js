@@ -2,13 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Icons, Header } from 'aqueduct-components';
-
+import { initGA } from './utils/analytics';
 import store from 'config/store';
 import Pages from 'components/layout';
 
 import 'react-app-polyfill/stable';
 import 'aqueduct-components/dist/bundle';
 import 'styles/index.scss';
+
+initGA();
 
 const App = () => (
   <Provider store={store}>
