@@ -50,7 +50,9 @@ class ExportService {
     const el = document.createElement('a');
     el.setAttribute('href', dataStr);
     el.setAttribute('download', name);
+    document.body.appendChild(el);
     el.click();
+    document.body.removeChild(el);
   }
 }
 
