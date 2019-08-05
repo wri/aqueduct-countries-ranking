@@ -4,4 +4,12 @@
   left: 0;
   right: 0;
   z-index: 600;
+
+  .aq__c-header-logo {
+    padding: 0 0 0 16px;
+  }
+
+  .aq__c-header .aq__c-header-logo .aq__header-title {
+    font-weight: bold;
+  }
 }

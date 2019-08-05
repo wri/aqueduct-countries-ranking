@@ -19,7 +19,26 @@ const App = () => (
         app="country-basin-risk-profiles-and-rankings"
         current-app="country-basin-risk-profiles-and-rankings"
       >
-        <div></div>
+        <ul className="list">
+          <li>
+            <a className="c-header-button" href="https://aqueduct-wriorg.pantheonsite.io/aqueduct/blog" target="_blank" rel="noopener noreferrer">Blog</a>
+          </li>
+          <li>
+            <a className="c-header-button" href="https://aqueduct-wriorg.pantheonsite.io/aqueduct/publications" target="_blank" rel="noopener noreferrer">Publications</a>
+          </li>
+          <li>
+            <a className="c-header-button" href="https://aqueduct-wriorg.pantheonsite.io/aqueduct/data" target="_blank" rel="noopener noreferrer">Data</a>
+          </li>
+          <li>
+            <a className="c-header-button" href="https://aqueduct-wriorg.pantheonsite.io/aqueduct/user-stories" target="_blank" rel="noopener noreferrer">User Stories</a>
+          </li>
+          <li>
+            <a className="c-header-button" href="https://aqueduct-wriorg.pantheonsite.io/aqueduct/about" target="_blank" rel="noopener noreferrer">About</a>
+          </li>
+          <li>
+            <a className="c-header-button" href="https://aqueduct-wriorg.pantheonsite.io/aqueduct/subscribe" target="_blank" rel="noopener noreferrer">Subscribe</a>
+          </li>
+        </ul>
       </Header>
     </div>
     <Pages />
