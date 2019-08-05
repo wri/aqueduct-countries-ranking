@@ -20,7 +20,7 @@ import { LayerManager, Layer } from 'layer-manager/dist/components';
 // utils
 import { logEvent } from 'utils/analytics';
 
-import { BASEMAPS, LABEL_LAYER_CONFIG } from './constants';
+import { BASEMAPS } from './constants';
 
 class Map extends Component {
   static propTypes = {
@@ -87,7 +87,7 @@ class Map extends Component {
       layers: [{...l, active: true}]
     })) : [];
 
-    if (scope !== 'COUNTRY') mapProps.label = LABEL_LAYER_CONFIG;
+    // mapProps.label = LABEL_LAYER_CONFIG;
 
     const shareClickHandler = () => {
       setModalState({isOpen: true, content: 'share' });
@@ -100,6 +100,12 @@ class Map extends Component {
       <LeMap {...mapProps}>
         {_map => {
           window.m = _map;
+
+          const Score = ({score}) => {
+            return (score)
+            ? <div>{`Score: ${score.toFixed(2)}`}</div>
+            : null;
+          };
 
           return (
           <Fragment>
@@ -153,6 +159,7 @@ class Map extends Component {
                         <h3>{this.state.interactionData.name_0}</h3>
                       )}
                     </div>
+                    <Score score={this.state.interactionData.score} />
                     <div>{this.state.interactionData.label}</div>
                   </div>
                   : <div>No data</div>
