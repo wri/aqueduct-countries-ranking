@@ -17,6 +17,9 @@ import BasemapControl from './basemap-control';
 import { PluginLeaflet } from 'layer-manager';
 import { LayerManager, Layer } from 'layer-manager/dist/components';
 
+// utils
+import { logEvent } from 'utils/analytics';
+
 import { BASEMAPS, LABEL_LAYER_CONFIG } from './constants';
 
 class Map extends Component {
@@ -88,6 +91,7 @@ class Map extends Component {
 
     const shareClickHandler = () => {
       setModalState(true);
+      logEvent('[AQ-Country-Ranking] Share', 'user opens share modal', 'click');
     };
 
     // NOTE: We need to prefix icon name with 'icon-' because Icon from vizzuality
