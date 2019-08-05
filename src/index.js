@@ -7,7 +7,7 @@ import store from 'config/store';
 import Pages from 'components/layout';
 
 import 'react-app-polyfill/stable';
-import 'aqueduct-components/dist/bundle';
+// import 'aqueduct-components/dist/bundle';
 import 'styles/index.scss';
 
 initGA();
