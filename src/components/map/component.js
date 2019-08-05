@@ -59,7 +59,7 @@ class Map extends Component {
   }
 
   render() {
-    const { className = '', viewport, layers, bounds, basemap, scope, setLayersOpacity, setModalState } = this.props;
+    const { className = '', viewport, layers, bounds, basemap, setLayersOpacity, setModalState } = this.props;
     const basemapConfig = {
       ...BASEMAPS[basemap || 'osm'],
       url: BASEMAPS[basemap || 'osm'].value
