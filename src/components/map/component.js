@@ -20,7 +20,7 @@ import { LayerManager, Layer } from 'layer-manager/dist/components';
 // utils
 import { logEvent } from 'utils/analytics';
 
-import { BASEMAPS } from './constants';
+import { BASEMAPS, LABEL_LAYER_CONFIG } from './constants';
 
 class Map extends Component {
   static propTypes = {
@@ -75,6 +75,7 @@ class Map extends Component {
       },
       bounds,
       basemap: basemapConfig,
+      label: LABEL_LAYER_CONFIG,
       events: {
         zoomend: (e, map) => { /*console.info(e, map);*/ },
         dragend: (e, map) => { /*console.info(e, map);*/ }
@@ -86,8 +87,6 @@ class Map extends Component {
       dataset: l.dataset,
       layers: [{...l, active: true}]
     })) : [];
-
-    // mapProps.label = LABEL_LAYER_CONFIG;
 
     const shareClickHandler = () => {
       setModalState({isOpen: true, content: 'share' });
