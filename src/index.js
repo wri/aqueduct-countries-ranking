@@ -18,7 +18,7 @@ const App = () => (
     <div className="header--wrapper">
       <Header
         title="Country Rankings"
-        appRoute="/applications/aqueduct/"
+        appRoute="/aqueduct/"
       >
         <ul className="list">
           <li>
