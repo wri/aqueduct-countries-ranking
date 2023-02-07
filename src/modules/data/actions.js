@@ -64,7 +64,7 @@ export const getCountriesData = createThunkAction('DATA/getCountriesData', () =>
 
   const options = {
     widget: {
-      id: 'e6e5d286-212b-48d8-b5f4-1678cded82bc',
+      id: 'd0e0c52f-652c-4cf0-a87d-09ec9198a4e0',
       params: { indicator }
     },
     indexKey: 'iso'
@@ -102,7 +102,7 @@ export const getProvincesData = createThunkAction('DATA/getProvincesData', () =>
 
   const options = {
     widget: {
-      id: '4b3d6e89-869c-45b6-88e3-28735d2b60fe',
+      id: 'b3d03097-6fbb-4b65-ae74-db0a80053a4d',
       params: { indicator, iso: locationId }
     },
     indexKey: 'province'
