@@ -10,8 +10,8 @@ export const getLayers = createThunkAction('LAYERS/getLayers', () => dispatch =>
   dispatch(setError(null));
 
   const datasets = {
-    country_rankings: '715001b0-5b85-4f7b-98fe-d368f6746171',
-    province_rankings: '3331da0e-fd28-4453-9051-e9c67518d63e'
+    country_rankings: '4d47ebba-0d4f-4e5e-9b67-4b4ed3fb6e37',
+    province_rankings: '460d7079-b934-4926-b542-96a44b18c741'
   };
 
   return WRIService.fetchDatasetsLayers(datasets)
