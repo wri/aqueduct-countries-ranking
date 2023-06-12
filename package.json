@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "aqueduct-components": "^1.1.11",
+    "aqueduct-components": "^1.1.12",
     "clipboard": "^2.0.4",
     "express": "^4.17.1",
     "express-favicon": "^2.0.1",
