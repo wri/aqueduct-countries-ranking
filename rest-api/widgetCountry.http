@@ -1,0 +1,46 @@
+# https://wri-rw.carto.com/api/v2/sql?q=SELECT gid_0 as iso, name_0 as country, indicator_name, weight, score, score_ranked FROM country_baseline_aqueduct40 WHERE indicator_name = 'bws' and weight in ('Tot', 'Irr', 'Dom', 'Ind', 'Pop') and score != -9999 ORDER BY score_ranked&hash=40736
+
+
+@host = https://api.resourcewatch.org/v1
+@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYzcwOTBiZTU5MTU5NmYyN2MxOThjYSIsInJvbGUiOiJBRE1JTiIsInByb3ZpZGVyIjoibG9jYWwiLCJlbWFpbCI6IkNhcmxvcy5EZWxSZWFsLjVAd3JpY29uc3VsdGFudC5vcmciLCJleHRyYVVzZXJEYXRhIjp7ImFwcHMiOlsicnciLCJhcXVlZHVjdCIsImFxdWVkdWN0LXdhdGVyLXJpc2siXX0sImNyZWF0ZWRBdCI6MTY4Njc3NTUyNTAyNSwicGhvdG8iOiJodHRwczovL3MzLmFtYXpvbmF3cy5jb20vd3JpLWFwaS1iYWNrdXBzL3Jlc291cmNld2F0Y2gvc3RhZ2luZy9wcm9maWxlcy9hdmF0YXJzLzAwMC8wMDAvMjU4L29yaWdpbmFsL2RhdGE_MTY3NDA2ODA0NyIsIm5hbWUiOiJDYXJsb3MgRGVsIFJlYWwiLCJpYXQiOjE2ODY3NzU1MjV9.3J7HR6Et_5wmJbbfjnh_7ZvrClzIsRAdwaqMJEMmOuM
+
+
+PATCH  {{host}}/widget/cafa5f8a-2d0d-4dec-8deb-f2127823c5dc
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+  "name": "Province rankings",
+  "dataset": "4eeb9cf7-68ee-4caf-a497-52022a002cf7",
+  "slug": "Province-rankings_3",
+  "userId": "63c7090be591596f27c198ca",
+  "description": "",
+  "application": [
+    "aqueduct-water-risk"
+  ],
+  "verified": false,
+  "default": false,
+  "protected": false,
+  "defaultEditableWidget": false,
+  "published": true,
+  "thumbnailUrl": "https://s3.amazonaws.com/wri-api-backups/resourcewatch/prod/thumbnails/cafa5f8a-2d0d-4dec-8deb-f2127823c5dc-1687805125090.png",
+  "freeze": false,
+  "env": "production",
+  "widgetConfig": {
+    "data": [
+      {
+        "url": "https://wri-rw.carto.com/api/v2/sql?q=SELECT gid_0 as iso, name_0 as country, name_1 as province, indicator_name, weight, score, score_ranked FROM province_baseline_aqueduct40 WHERE indicator_name = {{indicator}} and gid_0 = {{iso}} and weight in ('Tot', 'Irr', 'Dom', 'Ind', 'Pop') ORDER BY score_ranked&hash=55695"
+      }
+    ],
+    "params_config": [
+      {
+        "key": "indicator",
+        "required": true
+      },
+      {
+        "key": "iso",
+        "required": true
+      }
+    ]
+  }
+}

@@ -12,7 +12,7 @@ function getAverage(data) {
 }
 
 function setScore(score) {
-  if (!score) {
+  if ((!score && score !== 0) || score === -9999) {
     return 'NO DATA';
   }
 

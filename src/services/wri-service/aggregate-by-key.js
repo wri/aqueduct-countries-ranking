@@ -30,7 +30,7 @@ export function aggregateByKey(collection, key, mapFn = x => x) {
       stats.sum += row.score;
 
       if (!stats.min) {
-        stats.min = row.score;
+        stats.min = (row.score === -9999 ? 0 : row.score);
       } else {
         if (row.score < stats.min) {
           stats.min = row.score;
