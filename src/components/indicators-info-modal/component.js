@@ -19,7 +19,7 @@ export default () => (
         <dd>Riverine flood risk measures the percentage of population expected to be affected by Riverine flooding in an average year, accounting for existing flood-protection standards. Higher values indicate that a greater proportion of the population is expected to be impacted by Riverine floods on average.</dd>
         <br />
         <dt>Source: </dt>
-        <dd><a href="https://www.wri.org/publication/aqueduct-30">Aqueduct 2019</a> aggregated to a country and sub-national level using the methods described in Aqueduct <a href="https://www.wri.org/publication/aqueduct-country-and-river-basin-rankings">2013</a></dd>
+        <dd><a href="https://doi.org/10.46830/writn.23.00061">Aqueduct 4.0</a></dd>
       </dl>
     </div>
   </div>
