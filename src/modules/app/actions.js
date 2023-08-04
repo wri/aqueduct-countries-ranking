@@ -35,6 +35,9 @@ export const setCountry = createThunkAction('APP/setCountry', payload => dispatc
       .filter(entry => entry[0] !== '_stats')
       .map(entry => processLocation(entry[0], entry[1]));
 
+    if (data._stats.min === -9999) {
+      data._stats.min = 0
+    }
     dispatch(setWidgetStats({data: data._stats}));
     dispatch(setWidgetData({data: widgetData}));
   });
@@ -56,6 +59,9 @@ export const setIndicator = createThunkAction('APP/setIndicator', payload => (di
       .filter(entry => entry[0] !== '_stats')
       .map(entry => processLocation(entry[0], entry[1]));
 
+    if (data._stats.min === -9999) {
+      data._stats.min = 0
+    }
     dispatch(setWidgetStats({data: data._stats}));
     dispatch(setWidgetData({data: widgetData}));
   });

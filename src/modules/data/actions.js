@@ -44,6 +44,9 @@ export const setCountriesData = createAction('DATA/setCountriesData');
     if (country) {
       dispatch(setCountry({data: country.toUpperCase()}));
     } else {
+      if (data._stats.min === -9999) {
+        data._stats.min = 0
+      }
       dispatch(setWidgetStats({data: data._stats}));
       dispatch(setWidgetData({data: countries4widget}));
     }
