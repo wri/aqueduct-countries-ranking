@@ -50,6 +50,9 @@
       font-size: $font-size-big;
       font-weight: $font-weight-semi-bold;
       padding: 0 16px;
+      a {
+        color: #4A596A;
+      }
     }
 
     &:before {

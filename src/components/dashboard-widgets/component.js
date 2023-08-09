@@ -9,7 +9,7 @@ import {
   tableClasses
 } from './constants';
 
-const DashboardWidgets = ({title, buttonText, data: widget, onSelect}) => {
+const DashboardWidgets = ({title, buttonText, data: widget}) => {
   const { data, stats} = widget;
 
   if (!data.length || data.length === 0) {
@@ -59,7 +59,8 @@ const DashboardWidgets = ({title, buttonText, data: widget, onSelect}) => {
     <div className="c-widgets">
       <div className="widgets--header">
         <span className="-uppercase">{title}</span>
-        <button type="button" onClick={onSelect}>{buttonText}</button>
+
+        <button type="button"><a target='_blank' href='https://www.wri.org/data/aqueduct-40-country-rankings' rel="noreferrer">{buttonText}</a></button>
       </div>
       <div className="widgets--content-wrapper">
         <div className="widgets--content-header">

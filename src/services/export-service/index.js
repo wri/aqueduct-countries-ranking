@@ -32,14 +32,6 @@ class ExportService {
     const dataStr = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
     this.triggerDownload('dataset.csv', dataStr);
   }
-
-  /**
-   * Save a static file
-   */
-  saveRankings() {
-    const dataStr = `${process.env.PUBLIC_URL}/Aqueduct30_Rankings_V01.xlsx`;
-    this.triggerDownload('Aqueduct30_Rankings_V01.xlsx', dataStr);
-  }
   
   /**
    * Trigger download
