@@ -5,7 +5,7 @@ const currentCountry = state => state.dashboard.locationId;
 const currentScope = state => state.dashboard.scope;
 const currentIndicator = state => state.dashboard.indicators.value;
 
-const indexes = { bws: 0, drr: 1, rfr: 2 };
+const indexes = { bws: 0, rfr: 1, drr: 2 };
 
 export const getActiveLayers = createSelector(
   [layers, currentScope, currentCountry, currentIndicator],
