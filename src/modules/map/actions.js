@@ -25,9 +25,19 @@ export const getCountryBounds = createThunkAction('MAP/getCountryBounds', () => 
       const geometry = JSON.parse(rows[0].geometry);
       const bounds = window.L.geoJSON(geometry).getBounds();
       const bbox = bounds.toBBoxString().split(',').map(b => parseFloat(b));
-      dispatch(setMapBounds({ bbox, options: {
-        paddingTopLeft: [offset, 0]
-      } }));
+      if (iso === 'USA') {
+        dispatch(setMapBounds({ bbox: [-179.15055847, 18.9098587, -60, 72.6875], options: {
+          paddingTopLeft: [offset, 0]
+        } }));
+      } else if (iso === 'RUS') {
+        dispatch(setMapBounds({ bbox: [20, 41, 180, 81], options: {
+          paddingTopLeft: [offset, 0]
+        } }));
+      } else {
+        dispatch(setMapBounds({ bbox, options: {
+          paddingTopLeft: [offset, 0]
+        } }));
+      }
     });
 });
 
