@@ -6,7 +6,6 @@ import ShareModal from 'components/share-modal';
 import IndicatorsInfoModal from 'components/indicators-info-modal';
 import Dashboard from 'components/dashboard';
 import Map from 'components/map';
-import NewUpdatesModal from 'components/new-updates/component';
 
 function getModalContent(content) {
   switch(content) {
@@ -23,7 +22,6 @@ const Main = ({ isDashboardCollapsed, isModalOpen, modalContent, setDashboardCol
   const closeModalHandler = () => setModalState({ isOpen: false, content: null });
   return (
     <main className="c-main">
-      <NewUpdatesModal />
       <Sidebar
         customClass="c-aqueduct-sidebar"
         onToggle={isExpanded => {
