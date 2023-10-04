@@ -7,4 +7,22 @@
   background-color: palette(sand);
   display: flex;
   flex-flow: column;
+  .navTags {
+    background-color: palette(blue, dark);
+    display: flex;
+
+    div {
+      padding: 1rem 2rem;
+      color: white; 
+    }
+    
+    .selectedTag {
+      background-color: palette(blue, primary);
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+    
+   }
 }

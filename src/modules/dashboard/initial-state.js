@@ -1,7 +1,8 @@
-import { SCOPE } from './constants';
+import { SCOPE, TABS } from './constants';
 
 export default {
   scope: SCOPE.GENERAL,
+  tab: TABS.BASELINE,
   locationId: null,
   width: null,
   countries: {

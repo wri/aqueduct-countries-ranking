@@ -3,6 +3,11 @@ export const SCOPE = {
   COUNTRY: 'COUNTRY'
 };
 
+export const TABS = {
+  BASELINE: 'BASELINE',
+  FUTURE: 'FUTURE'
+}
+
 export default {
   SCOPE
 };

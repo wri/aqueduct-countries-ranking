@@ -1,0 +1,44 @@
+### layer
+GET https://api.resourcewatch.org/v1/dataset/39fec76b-2bba-4d5c-aa02-0283be6be91a/layer
+
+
+
+# with r as (
+#   SELECT 
+#     * 
+#   FROM 
+#     country_baseline_aqueduct40 
+#   WHERE 
+#     indicator_name = 'bws' 
+#     and weight = 'Tot'
+# ) SELECT
+# a.the_geom, 
+# a.the_geom_webmercator, 
+# a.cartodb_id, 
+# r.gid_0, 
+# coalesce(
+#   NULLIF(r.name_0, ''), 
+#   'No Data'
+# ) as name_0, 
+# r.indicator_name, 
+# r.score, 
+# coalesce(r.cat, -9999) as cat, 
+# \n (
+#   CASE WHEN label = 'NoData' THEN 'No Data' ELSE coalesce(
+#     NULLIF(r.label, ''), 
+#     'No Data'
+#   ) END
+# ) as label\nFROM gadm_wri_0 a \nLEFT 
+# JOIN r on a.gid_0 = r.gid_0\nWHERE a.gid_0 != 'ATA'
+
+### country ranking base
+GET https://wri-rw.carto.com/api/v2/sql?q=SELECT * FROM country_baseline_aqueduct40 WHERE indicator_name = 'bws' and weight = 'Tot'
+
+
+### country ranking base line future
+GET https://wri-rw.carto.com/api/v2/sql?q=with r as (SELECT * FROM aqueduct_results_country_future_2023 WHERE indicator_name = 'bws' AND scenario = 'opt' AND weight = 'Tot' AND period = {{period}}) SELECT a.the_geom, a.the_geom_webmercator, a.cartodb_id, r.gid_0, coalesce(NULLIF(r.name_0, ''), 'No Data') as name_0, r.indicator_name, r.score, coalesce(r.cat, -9999) as cat, (CASE WHEN label = 'NoData' THEN 'No Data' ELSE coalesce(NULLIF(r.label, ''), 'No Data') END) as label FROM gadm_wri_0 a LEFT JOIN r on a.gid_0 = r.gid_0 WHERE a.gid_0 != 'ATA'
+
+
+
+### country ranking base
+GET https://wri-rw.carto.com/api/v2/sql?q=with r as (SELECT * FROM country_baseline_aqueduct40 WHERE indicator_name = 'bws' and weight = 'Tot') SELECT a.the_geom, a.the_geom_webmercator, a.cartodb_id, r.gid_0, coalesce(NULLIF(r.name_0, ''), 'No Data') as name_0, r.indicator_name, r.score, coalesce(r.cat, -9999) as cat, (CASE WHEN label = 'NoData' THEN 'No Data' ELSE coalesce(NULLIF(r.label, ''), 'No Data') END) as label FROM gadm_wri_0 a LEFT JOIN r on a.gid_0 = r.gid_0 WHERE a.gid_0 != 'ATA'

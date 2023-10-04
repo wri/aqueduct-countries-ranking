@@ -1,16 +1,20 @@
 import React, { useEffect, useRef } from 'react';
 
 import HeaderGeneral from 'components/header-general';
+import HeaderGeneralFuture from 'components/header-general-future';
 import HeaderCountry from 'components/header-country';
+import HeaderCountryFuture from 'components/header-country-future';
 import DashboardWidgets from 'components/dashboard-widgets';
 import Footer from 'components/footer';
 
-import { SCOPE } from 'modules/dashboard/constants';
+import { SCOPE, TABS } from 'modules/dashboard/constants';
 
 const Dashboard = ({
   width,
   setWidth,
   scope,
+  tab,
+  setTab,
   headerData,
   widget,
   setCountry,
@@ -28,12 +32,28 @@ const Dashboard = ({
 
   return (
     <div ref={dashboardEl} className="dashboard">
-      { scope === SCOPE.GENERAL ?
-        <HeaderGeneral /> :
-        <HeaderCountry data={headerData} onBackClick={backClickHandler} />
+      <div className='navTags'>
+        <div className={`${tab === TABS.BASELINE? 'selectedTag' : ''}`} onClick={() => setTab({ data: TABS.BASELINE})} >BASELINE</div>
+        <div className={`${tab === TABS.FUTURE ? 'selectedTag' : ''}`} onClick={() => setTab({ data: TABS.FUTURE})}>FUTURE</div>
+      </div>
+      { tab === TABS.FUTURE ? 
+        <div>
+          { scope === SCOPE.GENERAL ?
+            <HeaderGeneralFuture /> :
+            <HeaderCountryFuture data={headerData} onBackClick={backClickHandler} />
+          }
+          <DashboardWidgets data={widget} title={rankingTitle} />
+        </div>
+        :
+        <div>
+          { scope === SCOPE.GENERAL ?
+            <HeaderGeneral /> :
+            <HeaderCountry data={headerData} onBackClick={backClickHandler} />
+          }
+          <DashboardWidgets data={widget} title={rankingTitle} />
+          <Footer scope={scope} />
+        </div>
       }
-      <DashboardWidgets data={widget} title={rankingTitle} />
-      <Footer scope={scope} />
     </div>
   );
 };

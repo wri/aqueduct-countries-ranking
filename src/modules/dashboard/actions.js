@@ -8,9 +8,10 @@ export const setIndicatorValue = createAction('DASHBOARD/setIndicatorValue');
 export const setWidgetData = createAction('DASHBOARD/setWidgetData');
 export const setWidgetStats = createAction('DASHBOARD/setWidgetStats');
 export const setWidth = createAction('DASHBOARD/setWidth');
+export const setTab = createAction('DASHBOARD/setTab');
 
 export default {
   setLocation,
   setCountryValue,
-  setIndicatorValue
+  setIndicatorValue,
 };
