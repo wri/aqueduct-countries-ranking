@@ -40,10 +40,7 @@ const Dashboard = ({
         <div>
           { scope === SCOPE.GENERAL ?
             <HeaderGeneralFuture /> :
-            <div>
-              <HeaderCountryFuture data={headerData} onBackClick={backClickHandler} />
-              <HeaderGeneralFuture />
-            </div>
+            <HeaderCountryFuture data={headerData} onBackClick={backClickHandler} />
           }
           <DashboardWidgets data={widget} title={rankingTitle} />
         </div>

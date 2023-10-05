@@ -81,7 +81,7 @@ export const getCountriesData = createThunkAction('DATA/getCountriesData', () =>
     indexKey: 'iso'
   };
 
-  return await WRIService.fetchDatasetWidgets(options)
+  return WRIService.fetchDatasetWidgets(options)
   .then(res => {
     const countries = Object.entries(res)
       .filter(entry => entry[0] !== '_stats')
@@ -119,7 +119,7 @@ export const getProvincesData = createThunkAction('DATA/getProvincesData', () =>
     indexKey: 'province'
   };
 
-  return await WRIService.fetchDatasetWidgets(options);
+  return WRIService.fetchDatasetWidgets(options);
 });
 
 

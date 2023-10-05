@@ -47,3 +47,9 @@ GET https://wri-rw.carto.com/api/v2/sql?q=with r as (SELECT * FROM country_basel
 ### regional ranking base
 GET https://wri-rw.carto.com/api/v2/sql?q=with province as (SELECT * FROM province_baseline_aqueduct40 WHERE indicator_name = 'bws' and weight = 'Tot'), country as (SELECT 1000000 + cartodb_id as cartodb_id, the_geom, the_geom_webmercator, null as gid_1, gid_0 as iso, name_0, null as name_1, null as indicator_name, null :: numeric as score, null :: numeric as cat, null as label, null as isoc FROM gadm_wri_0) SELECT * FROM country UNION ALLSELECT a.cartodb_id, a.the_geom, a.the_geom_webmercator, r.gid_1, null as iso, coalesce(NULLIF(r.name_0, ''), 'No Data') as name_0, coalesce(NULLIF(r.name_1, ''), 'No Data') as name_1, r.indicator_name, r.score, coalesce(r.cat, -9999) as cat, (CASE WHEN label = 'NoData' THEN 'No Data' ELSE coalesce(NULLIF(r.label, ''), 'No Data') END) as label, r.gid_0 as isoc FROM gadm_wri a LEFT JOIN province r on a.gid_1 = r.gid_1
 
+##### Widget regional
+GET https://wri-rw.carto.com/api/v2/sql?q=SELECT gid_0 as iso, name_0 as country, name_1 as province, indicator_name, weight, score, score_ranked FROM province_baseline_aqueduct40 WHERE indicator_name = 'bws' and gid_0 = 'AFG' and weight in ('Tot', 'Irr', 'Dom', 'Ind', 'Pop') ORDER BY score_ranked&hash=55695
+
+
+##### Widget country
+GET https://wri-rw.carto.com/api/v2/sql?q=SELECT gid_0 as iso, name_0 as country, indicator_name, weight, score, score_ranked FROM country_baseline_aqueduct40 WHERE indicator_name = 'bws' and weight in ('Tot', 'Irr', 'Dom', 'Ind', 'Pop') and score != -9999 ORDER BY score_ranked&hash=40736"
