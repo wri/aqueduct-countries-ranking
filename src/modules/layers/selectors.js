@@ -23,7 +23,7 @@ export const getActiveLayers = createSelector(
     if (_currentTab === TABS.BASELINE) {
       if (_currentScope === 'COUNTRY') {
         const layerSpec = _layers.province_rankings[indicatorIndex];
-        console.log({params: layerSpec.params})
+        console.log({params: layerSpec})
         return [{
           ...layerSpec,
           opacity: layerSpec.opacity || 0.5,
@@ -39,9 +39,11 @@ export const getActiveLayers = createSelector(
     } else {
       // Country view: show provinces in this case
       if (_currentScope === 'COUNTRY') {
+        const layerSpec = _layers.province_rankings_future[0];
         return [{
-          ..._layers.country_rankings[0],
-          opacity: _layers.country_rankings[indicatorIndex].opacity || 0.5
+          ...layerSpec,
+          opacity: _layers.province_rankings_future[0].opacity || 0.5,
+          params: { ...layerSpec.params, iso: _currentCountry, period: _period.value, scenario: _scenario.value }
         }];
       }
 
