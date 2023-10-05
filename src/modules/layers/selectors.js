@@ -23,7 +23,6 @@ export const getActiveLayers = createSelector(
     if (_currentTab === TABS.BASELINE) {
       if (_currentScope === 'COUNTRY') {
         const layerSpec = _layers.province_rankings[indicatorIndex];
-        console.log({params: layerSpec})
         return [{
           ...layerSpec,
           opacity: layerSpec.opacity || 0.5,
