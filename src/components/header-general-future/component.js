@@ -1,26 +1,22 @@
 import React from 'react';
 
-import { Field, Timeline, RadioGroup, CustomSelect } from 'aqueduct-components';
+import { Field, Timeline, CustomSelect, RadioGroup } from 'aqueduct-components';
 
 import CountrySelector from 'components/country-selector';
-const TIMELINE_ITEMS = [
-  { label: '2030', value: 2030, selected: true },
-  { label: '2050', value: 2050, selected: false },
-  { label: '2080', value: 2080, selected: false }
-];
 
-const SCENARIOS = [
-  {label: "pessimistic", value: 0},
-  {label: "business as usual", value: 1},
-  {label: "optimistic", value: 2}
-]
-
-
-const HeaderGeneralFuture = ({ setModalState }) => {
+const HeaderGeneralFuture = ({ setModalState, setPeriod, period, periods, scenario, scenarios, setScenario }) => {
 
   const indicatorsInfoHandler = () => {
     setModalState({ isOpen: true, content: 'indicators'});
   };
+
+  const periodChangeHandler = (p) => {
+    setPeriod({ data: p })
+  }
+
+  const scenarioChangeHandler = (s) => {
+    setScenario({ data: s})
+  }
 
   return (
     <header className="c-header">
@@ -53,10 +49,9 @@ const HeaderGeneralFuture = ({ setModalState }) => {
           <div className='header--content'>
             <Timeline
               theme="light"
-              items={TIMELINE_ITEMS}
-              // onChange={indicatorChangeHandler}
-              // customClass={classnames('indicator-selector--select', { [className]: Boolean(className)})}
-              // value={indicators.value}
+              items={periods}
+              onChange={periodChangeHandler}
+              value={period}
             />
           </div>
         </Field>
@@ -68,12 +63,10 @@ const HeaderGeneralFuture = ({ setModalState }) => {
           onMoreInfo={() => {}}
         >
             <RadioGroup
-              name="indicator"
+              name="scenarios"
               className="-inline"
-              items={SCENARIOS}
-              onChange={({ value }) => {}}
-              selected={0}
-              onInfo={(item) => { this.handleModal(item); }}
+              items={scenarios}
+              onChange={scenarioChangeHandler}
               theme="light"
             />
         </Field>

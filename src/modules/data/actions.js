@@ -3,7 +3,7 @@ import { createAction, createThunkAction } from 'vizzuality-redux-tools';
 import WRIService from 'services/wri-service';
 import processLocation from 'utils/process-location';
 
-import { INDICATORS } from 'services/wri-service/constants';
+import { INDICATORS, SCENARIOS, TIMELINE_ITEMS } from 'services/wri-service/constants';
 
 import { setCountry } from 'modules/app/actions';
 
@@ -13,7 +13,11 @@ import {
   setIndicators,
   setIndicatorValue,
   setWidgetData,
-  setWidgetStats
+  setWidgetStats,
+  setPeriods,
+  setPeriod,
+  setScenarios,
+  setScenario
 } from 'modules/dashboard/actions';
 
 export const setCountriesData = createAction('DATA/setCountriesData');
@@ -57,6 +61,10 @@ export const getIndicators = createThunkAction('DATA/getIndicators', () => dispa
   // todo: use a service
   dispatch(setIndicators({data: INDICATORS}))
   dispatch(setIndicatorValue({data: INDICATORS[0].value}));
+  dispatch(setPeriods({data: TIMELINE_ITEMS}));
+  dispatch(setPeriod({data: TIMELINE_ITEMS[0]}));
+  dispatch(setScenarios({data: SCENARIOS}));
+  dispatch(setScenario({data: SCENARIOS[0]}));
 });
 
 export const getCountriesData = createThunkAction('DATA/getCountriesData', () => async (dispatch, state) => {

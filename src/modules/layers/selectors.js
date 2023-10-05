@@ -6,12 +6,14 @@ const currentCountry = state => state.dashboard.locationId;
 const currentScope = state => state.dashboard.scope;
 const currentTab = state => state.dashboard.tab;
 const currentIndicator = state => state.dashboard.indicators.value;
+const period = state => state.dashboard.period
+const scenario = state => state.dashboard.scenario
 
 const indexes = { bws: 0, rfr: 1, drr: 2 };
 
 export const getActiveLayers = createSelector(
-  [layers, currentScope, currentTab, currentCountry, currentIndicator],
-  (_layers, _currentScope, _currentTab, _currentCountry, _currentIndicator) => {
+  [layers, currentScope, currentTab, period, scenario, currentCountry, currentIndicator],
+  (_layers, _currentScope, _currentTab, _period, _scenario, _currentCountry, _currentIndicator) => {
     if (!_layers) {
       return [];
     }
@@ -46,7 +48,7 @@ export const getActiveLayers = createSelector(
       return [{
         ..._layers.country_rankings_future[0],
         opacity: _layers.country_rankings_future[0].opacity || 0.5,
-        params: { period: 2050 }
+        params: { period: _period.value, scenario: _scenario.value }
       }];
     }
 

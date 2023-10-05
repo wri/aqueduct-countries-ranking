@@ -15,5 +15,9 @@ export default {
   [actions.setWidgetData]: (state, { payload: { data } }) => ({ ...state, widget: {...state.widget, data} }),
   [actions.setWidgetStats]: (state, { payload: { data: stats } }) => ({ ...state, widget: {...state.widget, stats} }),
   [actions.setWidth]: (state, { payload: { data } }) => ({ ...state, width: data }),
-  [actions.setTab]: (state, { payload: { data } }) => ({ ...state, tab: data })
+  [actions.setTab]: (state, { payload: { data } }) => ({ ...state, tab: data }),
+  [actions.setPeriod]: (state, { payload: { data } }) => ({ ...state, period: data }),
+  [actions.setPeriods]: (state, { payload: { data } }) => ({ ...state, periods: data }),
+  [actions.setScenario]: (state, { payload: { data } }) => ({ ...state, scenario: data }),
+  [actions.setScenarios]: (state, { payload: { data } }) => ({ ...state, scenarios: data })
 };
