@@ -42,7 +42,7 @@ const Dashboard = ({
         <div>
           { scope === SCOPE.GENERAL ?
             <HeaderGeneralFuture /> :
-            <HeaderRegionalFuture data={headerData} onBackClick={backClickHandler} />
+            <HeaderRegionalFuture data={headerFutureData} onBackClick={backClickHandler} />
           }
           <DashboardWidgets data={widgetFuture} title={rankingTitle} />
         </div>

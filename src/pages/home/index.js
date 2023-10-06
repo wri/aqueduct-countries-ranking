@@ -5,12 +5,13 @@ import Main from 'components/main';
 // utils
 import { logPageView } from 'utils/analytics';
 
-const HomePage = ({getLayers, loadDashboardData}) => {
+const HomePage = ({getLayers, loadDashboardData, loadDashboardCountryFutureData}) => {
   useEffect(() => {
     getLayers();
     loadDashboardData();
+    loadDashboardCountryFutureData()
     logPageView();
-  }, [getLayers, loadDashboardData]);
+  }, [getLayers, loadDashboardCountryFutureData, loadDashboardData]);
 
 
   return <Main />;

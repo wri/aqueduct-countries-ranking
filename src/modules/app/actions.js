@@ -1,7 +1,7 @@
 import { createAction, createThunkAction } from 'vizzuality-redux-tools';
 
 import exportService from 'services/export-service';
-import processLocation from 'utils/process-location';
+import { processLocation } from 'utils/process-location';
 
 // utils
 import { logEvent } from 'utils/analytics';

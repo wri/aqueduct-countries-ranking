@@ -5,6 +5,12 @@ export default {
     isLoaded: false,
     error: null
   },
+  countriesFuture: {
+    data: null,
+    isLoading: false,
+    isLoaded: false,
+    error: null
+  },
   provinces: {
     cache: [],
     data: null,

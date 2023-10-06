@@ -1,7 +1,7 @@
 import { createAction, createThunkAction } from 'vizzuality-redux-tools';
 
 import WRIService from 'services/wri-service';
-import processLocation from 'utils/process-location';
+import { processLocation } from 'utils/process-location';
 
 import { INDICATORS, SCENARIOS, TIMELINE_ITEMS } from 'services/wri-service/constants';
 

@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 import { Icon } from 'vizzuality-components';
 import { Field, Timeline, CustomSelect, RadioGroup } from 'aqueduct-components';
 
-const HeaderCountry = ({ onBackClick, data, setModalState, setPeriod, period, periods, scenario, scenarios, setScenario, loadDashboardRegionalFutureData }) => {
+const HeaderRegional = ({ onBackClick, data, setModalState, setPeriod, period, periods, scenario, scenarios, setScenario, loadDashboardRegionalFutureData, loadDashboardCountryFutureData }) => {
   const backClickHandler = () => onBackClick();
+
+  console.log({data})
 
   const order = ['Irr', 'Dom', 'Ind', 'Tot'];
   const headerIndicators = Object.fromEntries(Object.entries(data.indicators)
@@ -25,7 +27,8 @@ const HeaderCountry = ({ onBackClick, data, setModalState, setPeriod, period, pe
 
   useEffect(() => {
     loadDashboardRegionalFutureData();
-  }, [scenario, period, loadDashboardRegionalFutureData]);
+    loadDashboardCountryFutureData();
+  }, [scenario, period, loadDashboardRegionalFutureData, loadDashboardCountryFutureData]);
 
   return (
     <header className="c-header">
@@ -108,14 +111,14 @@ const HeaderCountry = ({ onBackClick, data, setModalState, setPeriod, period, pe
   );
 };
 
-HeaderCountry.propTypes = {
+HeaderRegional.propTypes = {
   onBackClick: PropTypes.func
 };
 
-HeaderCountry.defaultProps = {
+HeaderRegional.defaultProps = {
   onBackClick: () => {
     console.log('Go back button was pressed.');
   }
 };
 
-export default HeaderCountry;
+export default HeaderRegional;

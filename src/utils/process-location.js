@@ -57,5 +57,3 @@ export function processLocation(iso, data, nameProp='country') {
     indicators: getIndicators(data)
   };
 }
-
-export default processLocation;
