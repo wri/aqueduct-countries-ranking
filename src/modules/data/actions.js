@@ -81,6 +81,20 @@ export const loadDashboardCountryFutureData = createThunkAction('DATA/loadDashbo
   });
 })
 
+export const loadDashboardRegionalFutureData = createThunkAction('DATA/loadDashboardRegionalFutureData', () => (dispatch, state) => {
+  dispatch(getProvincesFutureData()).then(data => {
+    const widgetData = Object.entries(data)
+      .filter(entry => entry[0] !== '_stats')
+      .map(entry => processLocation(entry[0], entry[1]));
+
+    if (data._stats.min === -9999) {
+      data._stats.min = 0
+    }
+    dispatch(setWidgetFutureStats({data: data._stats}));
+    dispatch(setWidgetFutureData({data: widgetData}));
+  });
+})
+
 export const getIndicators = createThunkAction('DATA/getIndicators', () => dispatch => {
   // todo: use a service
   dispatch(setIndicators({data: INDICATORS}))
@@ -145,7 +159,6 @@ export const getCountriesFutureData = createThunkAction('DATA/getCountriesFuture
 
   return WRIService.fetchDatasetWidgets(options)
     .then(res => {
-      console.log({res})
       dispatch(setCountriesFutureData({data: res}));
       return res
     })
@@ -161,6 +174,23 @@ export const getProvincesData = createThunkAction('DATA/getProvincesData', () =>
     widget: {
       id: 'cafa5f8a-2d0d-4dec-8deb-f2127823c5dc',
       params: { indicator, iso: locationId }
+    },
+    indexKey: 'province'
+  };
+
+  return WRIService.fetchDatasetWidgets(options);
+});
+
+export const getProvincesFutureData = createThunkAction('DATA/getProvincesFutureData', () => async (dispatch, state) => {
+  const dashboard = state().dashboard;
+  const { locationId, scenario: { value: scenario }, period: { value: period }} = dashboard;
+  
+  if (!period || !scenario) return;
+
+  const options = {
+    widget: {
+      id: 'd6a86dd2-5a95-4731-924e-7fee451c4e63',
+      params: { scenario, period , iso: locationId }
     },
     indexKey: 'province'
   };

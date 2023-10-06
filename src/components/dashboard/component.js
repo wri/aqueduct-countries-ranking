@@ -2,8 +2,8 @@ import React, { useEffect, useRef } from 'react';
 
 import HeaderGeneral from 'components/header-general';
 import HeaderGeneralFuture from 'components/header-general-future';
-import HeaderCountry from 'components/header-country';
-import HeaderCountryFuture from 'components/header-country-future';
+import HeaderRegional from 'components/header-regional';
+import HeaderRegionalFuture from 'components/header-regional-future';
 import DashboardWidgets from 'components/dashboard-widgets';
 import Footer from 'components/footer';
 
@@ -42,7 +42,7 @@ const Dashboard = ({
         <div>
           { scope === SCOPE.GENERAL ?
             <HeaderGeneralFuture /> :
-            <HeaderCountryFuture data={headerData} onBackClick={backClickHandler} />
+            <HeaderRegionalFuture data={headerData} onBackClick={backClickHandler} />
           }
           <DashboardWidgets data={widgetFuture} title={rankingTitle} />
         </div>
@@ -50,7 +50,7 @@ const Dashboard = ({
         <div>
           { scope === SCOPE.GENERAL ?
             <HeaderGeneral /> :
-            <HeaderCountry data={headerData} onBackClick={backClickHandler} />
+            <HeaderRegional data={headerData} onBackClick={backClickHandler} />
           }
           <DashboardWidgets data={widget} title={rankingTitle} />
           <Footer scope={scope} />

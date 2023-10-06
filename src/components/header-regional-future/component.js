@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Icon } from 'vizzuality-components';
 import { Field, Timeline, CustomSelect, RadioGroup } from 'aqueduct-components';
 
-const HeaderCountry = ({ onBackClick, data, setModalState, setPeriod, period, periods, scenario, scenarios, setScenario }) => {
+const HeaderCountry = ({ onBackClick, data, setModalState, setPeriod, period, periods, scenario, scenarios, setScenario, loadDashboardRegionalFutureData }) => {
   const backClickHandler = () => onBackClick();
 
   const order = ['Irr', 'Dom', 'Ind', 'Tot'];
@@ -22,6 +22,10 @@ const HeaderCountry = ({ onBackClick, data, setModalState, setPeriod, period, pe
   const scenarioChangeHandler = (s) => {
     setScenario({ data: s})
   }
+
+  useEffect(() => {
+    loadDashboardRegionalFutureData();
+  }, [scenario, period, loadDashboardRegionalFutureData]);
 
   return (
     <header className="c-header">

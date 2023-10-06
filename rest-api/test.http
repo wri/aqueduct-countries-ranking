@@ -59,3 +59,7 @@ GET https://wri-rw.carto.com/api/v2/sql?q=SELECT gid_0 as iso, name_0 as country
 
 ###
 GET https://wri-rw.carto.com/api/v2/sql?q=SELECT gid_0 as iso, name_0 as country, indicator_name, weight, score, score_ranked FROM aqueduct_results_country_future_2023 WHERE indicator_name = 'bws' AND scenario = 'opt' AND period = 2030
+
+
+###
+GET https://wri-rw.carto.com/api/v2/sql?q=SELECT gid_0 as iso, name_0 as country, name_1 as province, indicator_name, weight, score, score_ranked FROM aqueduct_results_province_future_2023 WHERE indicator_name = 'bws' and gid_0 = 'AFG' and weight in ('Tot', 'Irr', 'Dom', 'Ind', 'Pop') AND scenario = 'opt' AND period = 2030 ORDER BY score_ranked&hash=55695
