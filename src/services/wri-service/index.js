@@ -65,7 +65,6 @@ class WRIService {
         })
         .then(widgetData => {
           const url = this.processWidgetData(widgetData, widgetParams);
-          console.log({url})
           return axios.get(url);
         })
         .then(response => {

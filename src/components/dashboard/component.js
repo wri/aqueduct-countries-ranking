@@ -16,7 +16,9 @@ const Dashboard = ({
   tab,
   setTab,
   headerData,
+  headerFutureData,
   widget,
+  widgetFuture,
   setCountry,
 }) => {
   const dashboardEl = useRef(null);
@@ -42,7 +44,7 @@ const Dashboard = ({
             <HeaderGeneralFuture /> :
             <HeaderCountryFuture data={headerData} onBackClick={backClickHandler} />
           }
-          <DashboardWidgets data={widget} title={rankingTitle} />
+          <DashboardWidgets data={widgetFuture} title={rankingTitle} />
         </div>
         :
         <div>

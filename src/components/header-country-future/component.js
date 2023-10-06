@@ -11,17 +11,17 @@ const HeaderCountry = ({ onBackClick, data, setModalState, setPeriod, period, pe
     .filter(data => order.includes(data[0]))
     .sort((a, b) => order.indexOf(a[0]) - order.indexOf(b[0])));
 
-    const indicatorsInfoHandler = () => {
-      setModalState({ isOpen: true, content: 'indicators'});
-    };
-  
-    const periodChangeHandler = (p) => {
-      setPeriod({ data: p })
-    }
-  
-    const scenarioChangeHandler = (s) => {
-      setScenario({ data: s})
-    }
+  const indicatorsInfoHandler = () => {
+    setModalState({ isOpen: true, content: 'indicators'});
+  };
+
+  const periodChangeHandler = (p) => {
+    setPeriod({ data: p })
+  }
+
+  const scenarioChangeHandler = (s) => {
+    setScenario({ data: s})
+  }
 
   return (
     <header className="c-header">

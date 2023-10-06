@@ -53,3 +53,9 @@ GET https://wri-rw.carto.com/api/v2/sql?q=SELECT gid_0 as iso, name_0 as country
 
 ##### Widget country
 GET https://wri-rw.carto.com/api/v2/sql?q=SELECT gid_0 as iso, name_0 as country, indicator_name, weight, score, score_ranked FROM country_baseline_aqueduct40 WHERE indicator_name = 'bws' and weight in ('Tot', 'Irr', 'Dom', 'Ind', 'Pop') and score != -9999 ORDER BY score_ranked&hash=40736"
+
+##### Widget country future
+GET https://wri-rw.carto.com/api/v2/sql?q=SELECT gid_0 as iso, name_0 as country, indicator_name, weight, score, score_ranked FROM aqueduct_results_country_future_2023 WHERE indicator_name = 'bws' and weight in ('Tot', 'Irr', 'Dom', 'Ind', 'Pop') and scenario = 'opt' and period = 2080 and score != -9999 ORDER BY score_ranked&hash=40736"
+
+###
+GET https://wri-rw.carto.com/api/v2/sql?q=SELECT gid_0 as iso, name_0 as country, indicator_name, weight, score, score_ranked FROM aqueduct_results_country_future_2023 WHERE indicator_name = 'bws' AND scenario = 'opt' AND period = 2030

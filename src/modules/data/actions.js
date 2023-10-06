@@ -13,7 +13,9 @@ import {
   setIndicators,
   setIndicatorValue,
   setWidgetData,
+  setWidgetFutureData,
   setWidgetStats,
+  setWidgetFutureStats,
   setPeriods,
   setPeriod,
   setScenarios,
@@ -21,6 +23,7 @@ import {
 } from 'modules/dashboard/actions';
 
 export const setCountriesData = createAction('DATA/setCountriesData');
+export const setCountriesFutureData = createAction('DATA/setCountriesFutureData');
 
 /**
  * A NOTE on DATA actions
@@ -56,6 +59,27 @@ export const setCountriesData = createAction('DATA/setCountriesData');
     }
   });
 });
+
+export const loadDashboardCountryFutureData = createThunkAction('DATA/loadDashboardCountryFutureData', () => (dispatch, state) => {
+  const { router } = state();
+  const { country } = router.query || {};
+
+  dispatch(getCountriesFutureData()).then(data => {
+    const countries4widget = Object.entries(data)
+      .filter(entry => entry[0] !== '_stats')
+      .map(entry => processLocation(entry[0], entry[1]));
+
+    if (country) {
+      dispatch(setCountry({data: country.toUpperCase()}));
+    } else {
+      if (data._stats.min === -9999) {
+        data._stats.min = 0
+      }
+      dispatch(setWidgetFutureStats({data: data._stats}));
+      dispatch(setWidgetFutureData({data: countries4widget}));
+    }
+  });
+})
 
 export const getIndicators = createThunkAction('DATA/getIndicators', () => dispatch => {
   // todo: use a service
@@ -103,6 +127,28 @@ export const getCountriesData = createThunkAction('DATA/getCountriesData', () =>
     dispatch(setCountriesData({data: res}));
     return res;
   })
+});
+
+export const getCountriesFutureData = createThunkAction('DATA/getCountriesFutureData', () => async (dispatch, state) => {
+  const dashboard = state().dashboard;
+  const { scenario: { value: scenario }, period: { value: period } } = dashboard;
+  
+  if (!scenario || !period ) return;
+
+  const options = {
+    widget: {
+      id: '85d03d03-9eb0-4280-a50b-4934d77bfa89',
+      params: { scenario, period }
+    },
+    indexKey: 'iso'
+  };
+
+  return WRIService.fetchDatasetWidgets(options)
+    .then(res => {
+      console.log({res})
+      dispatch(setCountriesFutureData({data: res}));
+      return res
+    })
 });
 
 export const getProvincesData = createThunkAction('DATA/getProvincesData', () => async (dispatch, state) => {

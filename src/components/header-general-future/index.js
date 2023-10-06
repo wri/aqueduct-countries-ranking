@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 
 import { setModalState } from 'modules/app/actions';
 import { setPeriod, setScenario } from 'modules/dashboard/actions';
+import { loadDashboardCountryFutureData } from 'modules/data/actions';
 
 import HeaderGeneralFuture from './component';
 
@@ -16,7 +17,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   setModalState,
   setPeriod,
-  setScenario
+  setScenario,
+  loadDashboardCountryFutureData
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HeaderGeneralFuture);

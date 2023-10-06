@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { Field, Timeline, CustomSelect, RadioGroup } from 'aqueduct-components';
 
 import CountrySelector from 'components/country-selector';
 
-const HeaderGeneralFuture = ({ setModalState, setPeriod, period, periods, scenario, scenarios, setScenario }) => {
+const HeaderGeneralFuture = ({ setModalState, setPeriod, period, periods, scenario, scenarios, setScenario, loadDashboardCountryFutureData }) => {
 
   const indicatorsInfoHandler = () => {
     setModalState({ isOpen: true, content: 'indicators'});
@@ -17,6 +17,10 @@ const HeaderGeneralFuture = ({ setModalState, setPeriod, period, periods, scenar
   const scenarioChangeHandler = (s) => {
     setScenario({ data: s})
   }
+
+  useEffect(() => {
+    loadDashboardCountryFutureData();
+  }, [scenario, period, loadDashboardCountryFutureData]);
 
   return (
     <header className="c-header">
