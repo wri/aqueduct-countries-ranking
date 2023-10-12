@@ -30,8 +30,8 @@ export const TIMELINE_ITEMS = [
 ];
 
 export const SCENARIOS = [
-  {label: "Pessimistic", value: 'pes', checked: true},
-  {label: "Business as usual", value: 'bau', checked: false},
+  {label: "Pessimistic", value: 'pes', checked: false},
+  {label: "Business as usual", value: 'bau', checked: true},
   {label: "Optimistic", value: 'opt', checked: false}
 ]
 

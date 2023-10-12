@@ -4,6 +4,9 @@ import { Sidebar } from 'aqueduct-components';
 import ModalManager from 'components/modal-manager';
 import ShareModal from 'components/share-modal';
 import IndicatorsInfoModal from 'components/indicators-info-modal';
+import FutureWaterRiskIndicator from 'components/future-water-stress-info-modal'
+import FutureTimeframe from 'components/future-timeframe-info-modal'
+import FutureScenario from 'components/future-scenarios-info-modal'
 import Dashboard from 'components/dashboard';
 import Map from 'components/map';
 
@@ -13,6 +16,12 @@ function getModalContent(content) {
       return <ShareModal />;
     case 'indicators':
       return <IndicatorsInfoModal />;
+    case 'future-water-risk-indicator':
+      return <FutureWaterRiskIndicator />;
+    case 'future-timeframe':
+      return <FutureTimeframe />;
+    case 'future-scenario':
+      return <FutureScenario />;
     default:
       return <></>;
   }

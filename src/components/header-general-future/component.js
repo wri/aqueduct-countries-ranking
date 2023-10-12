@@ -7,7 +7,15 @@ import CountrySelector from 'components/country-selector';
 const HeaderGeneralFuture = ({ setModalState, setPeriod, period, periods, scenario, scenarios, setScenario, loadDashboardCountryFutureData }) => {
 
   const indicatorsInfoHandler = () => {
-    setModalState({ isOpen: true, content: 'indicators'});
+    setModalState({ isOpen: true, content: 'future-water-risk-indicator'});
+  };
+
+  const TimeframeInfoHandler = () => {
+    setModalState({ isOpen: true, content: 'future-timeframe'});
+  };
+
+  const ScenarioInfoHandler = () => {
+    setModalState({ isOpen: true, content: 'future-scenario'});
   };
 
   const periodChangeHandler = (p) => {
@@ -35,7 +43,7 @@ const HeaderGeneralFuture = ({ setModalState, setPeriod, period, periods, scenar
         >
           <CustomSelect
             theme="light"
-            options={[{ label: "Baseline Water Stress", value: "bws"}]}
+            options={[{ label: "Water Stress", value: "bws"}]}
             value={"bws"}
           />
         </Field>
@@ -48,7 +56,7 @@ const HeaderGeneralFuture = ({ setModalState, setPeriod, period, periods, scenar
           className="-bigger"
           customClass="c-indicator-selector"
           theme="light"
-          onMoreInfo={() => {}}
+          onMoreInfo={TimeframeInfoHandler}
         >
           <div className='header--content'>
             <Timeline
@@ -64,7 +72,7 @@ const HeaderGeneralFuture = ({ setModalState, setPeriod, period, periods, scenar
           label="Scenarios"
           customClass="c-indicator-selector"
           theme="light"
-          onMoreInfo={() => {}}
+          onMoreInfo={ScenarioInfoHandler}
         >
             <RadioGroup
               name="scenarios"
