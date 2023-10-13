@@ -6,8 +6,6 @@ import { Field, Timeline, CustomSelect, RadioGroup } from 'aqueduct-components';
 const HeaderRegional = ({ onBackClick, data, setModalState, setPeriod, period, periods, scenario, scenarios, setScenario, loadDashboardRegionalFutureData, loadDashboardCountryFutureData }) => {
   const backClickHandler = () => onBackClick();
 
-  console.log({data})
-
   const order = ['Irr', 'Dom', 'Ind', 'Tot'];
   const headerIndicators = Object.fromEntries(Object.entries(data.indicators)
     .filter(data => order.includes(data[0]))
