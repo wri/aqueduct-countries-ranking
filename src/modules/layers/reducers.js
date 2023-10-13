@@ -19,7 +19,9 @@ export default {
     ...state,
     list: {
       country_rankings: state.list.country_rankings.map(l => ({ ...l, opacity: payload })),
-      province_rankings: state.list.province_rankings.map(l => ({ ...l, opacity: payload }))
+      province_rankings: state.list.province_rankings.map(l => ({ ...l, opacity: payload })),
+      country_rankings_future: state.list.country_rankings_future.map(l => ({ ...l, opacity: payload })),
+      province_rankings_future: state.list.province_rankings_future.map(l => ({ ...l, opacity: payload })),
     }
   })
 };
