@@ -7,7 +7,7 @@ Content-Type: application/json
 Authorization: {{token}}
 
 {
-   "name":"Baseline water stress future provinces",
+   "name":"Water stress",
    "application":[
       "aqueduct"
    ],
