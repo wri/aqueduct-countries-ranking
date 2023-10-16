@@ -18,8 +18,24 @@ export default {
   [actions.setWidgetFutureStats]: (state, { payload: { data: stats } }) => ({ ...state, widgetFuture: {...state.widgetFuture, stats} }),
   [actions.setWidth]: (state, { payload: { data } }) => ({ ...state, width: data }),
   [actions.setTab]: (state, { payload: { data } }) => ({ ...state, tab: data }),
-  [actions.setPeriod]: (state, { payload: { data } }) => ({ ...state, period: data }),
+  [actions.setPeriod]: (state, { payload: { data } }) => {
+    const periods = state.periods.map(p => {
+      if (p.label === data.label) {
+        return {...p, selected: true}
+      }
+      return {...p, selected: false}
+    })
+    return { ...state, periods, period: data }
+  },
   [actions.setPeriods]: (state, { payload: { data } }) => ({ ...state, periods: data }),
-  [actions.setScenario]: (state, { payload: { data } }) => ({ ...state, scenario: data }),
+  [actions.setScenario]: (state, { payload: { data } }) => {
+    const scenarios = state.scenarios.map(s => {
+      if (s.label === data.label) {
+        return { ...s, checked: true }
+      }
+      return { ...s, checked: false}
+    })
+    return { ...state, scenarios, scenario: data }
+  },
   [actions.setScenarios]: (state, { payload: { data } }) => ({ ...state, scenarios: data })
 };

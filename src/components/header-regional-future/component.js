@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Icon } from 'vizzuality-components';
 import { Field, Timeline, CustomSelect, RadioGroup } from 'aqueduct-components';
 
-const HeaderRegional = ({ onBackClick, data, setModalState, setPeriod, period, periods, scenario, scenarios, setScenario, loadDashboardRegionalFutureData, loadDashboardCountryFutureData }) => {
+const HeaderRegional = ({ onBackClick, data, setModalState, setPeriod, periods, scenario, scenarios, setScenario, loadDashboardRegionalFutureData, loadDashboardCountryFutureData }) => {
   const backClickHandler = () => onBackClick();
 
   const order = ['Irr', 'Dom', 'Ind', 'Tot'];
@@ -11,9 +11,18 @@ const HeaderRegional = ({ onBackClick, data, setModalState, setPeriod, period, p
     .filter(data => order.includes(data[0]))
     .sort((a, b) => order.indexOf(a[0]) - order.indexOf(b[0])));
 
-  const indicatorsInfoHandler = () => {
-    setModalState({ isOpen: true, content: 'indicators'});
-  };
+    const indicatorsInfoHandler = () => {
+      setModalState({ isOpen: true, content: 'future-water-risk-indicator'});
+    };
+  
+    const TimeframeInfoHandler = () => {
+      setModalState({ isOpen: true, content: 'future-timeframe'});
+    };
+  
+    const ScenarioInfoHandler = () => {
+      setModalState({ isOpen: true, content: 'future-scenario'});
+    };
+  
 
   const periodChangeHandler = (p) => {
     setPeriod({ data: p })
@@ -26,7 +35,7 @@ const HeaderRegional = ({ onBackClick, data, setModalState, setPeriod, period, p
   useEffect(() => {
     loadDashboardRegionalFutureData();
     loadDashboardCountryFutureData();
-  }, [scenario, period, loadDashboardRegionalFutureData, loadDashboardCountryFutureData]);
+  }, [scenario, loadDashboardRegionalFutureData, loadDashboardCountryFutureData]);
 
   return (
     <header className="c-header">
@@ -61,7 +70,7 @@ const HeaderRegional = ({ onBackClick, data, setModalState, setPeriod, period, p
         >
           <CustomSelect
             theme="light"
-            options={[{ label: "Baseline Water Stress", value: "bws"}]}
+            options={[{ label: "Water Stress", value: "bws"}]}
             value={"bws"}
           />
         </Field>        
@@ -74,14 +83,13 @@ const HeaderRegional = ({ onBackClick, data, setModalState, setPeriod, period, p
           className="-bigger"
           customClass="c-indicator-selector"
           theme="light"
-          onMoreInfo={() => {}}
+          onMoreInfo={TimeframeInfoHandler}
         >
           <div className='header--content'>
             <Timeline
               theme="light"
               items={periods}
               onChange={periodChangeHandler}
-              value={period}
             />
           </div>
         </Field>
@@ -90,7 +98,7 @@ const HeaderRegional = ({ onBackClick, data, setModalState, setPeriod, period, p
           label="Scenarios"
           customClass="c-indicator-selector"
           theme="light"
-          onMoreInfo={() => {}}
+          onMoreInfo={ScenarioInfoHandler}
         >
             <RadioGroup
               name="scenarios"

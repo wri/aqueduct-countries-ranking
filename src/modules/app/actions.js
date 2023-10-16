@@ -10,6 +10,8 @@ import {
   setCountryValue,
   setIndicatorValue,
   setLocation,
+  setPeriod,
+  setScenario,
   setWidgetData,
   setWidgetStats
 } from 'modules/dashboard/actions';
@@ -44,6 +46,8 @@ export const setCountry = createThunkAction('APP/setCountry', payload => dispatc
 
   if (!payload.data) {
     dispatch(setMapBounds({bbox: [-180, 90, 180, -90]}));
+    dispatch(setScenario({data: {label: "Business as usual", value: 'bau', checked: true}}))
+    dispatch(setPeriod({data: { label: '2030', value: 2030, selected: true }}))
   }
 });
 
