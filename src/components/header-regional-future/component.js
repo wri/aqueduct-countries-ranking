@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Icon } from 'vizzuality-components';
 import { Field, Timeline, CustomSelect, RadioGroup } from 'aqueduct-components';
 
-const HeaderRegional = ({ onBackClick, data, setModalState, setPeriod, periods, scenario, scenarios, setScenario, loadDashboardRegionalFutureData, loadDashboardCountryFutureData }) => {
+const HeaderRegional = ({ onBackClick, data, setModalState, setPeriod, periods, period, scenario, scenarios, setScenario, loadDashboardRegionalFutureData, loadDashboardCountryFutureData }) => {
   const backClickHandler = () => onBackClick();
 
   const order = ['Irr', 'Dom', 'Ind', 'Tot'];
@@ -35,7 +35,7 @@ const HeaderRegional = ({ onBackClick, data, setModalState, setPeriod, periods, 
   useEffect(() => {
     loadDashboardRegionalFutureData();
     loadDashboardCountryFutureData();
-  }, [scenario, loadDashboardRegionalFutureData, loadDashboardCountryFutureData]);
+  }, [scenario, period, loadDashboardRegionalFutureData, loadDashboardCountryFutureData]);
 
   return (
     <header className="c-header">
